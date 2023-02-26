@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class grid : MonoBehaviour
 {
-    PLAYER_GRID = [0, 0, 0, 0, 0, 0, 0, 0, 0]
-    ENEMY_GRID = [0, 0, 0, 0, 0, 0, 0, 0, 0]
+    int[] PLAYER_GRID = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+    int[] ENEMY_GRID = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
     // Start is called before the first frame update
     void Start()

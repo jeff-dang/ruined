@@ -1,0 +1,39 @@
+{
+	"data" : [
+	{
+		"LevelIdentifier":"1-1",
+		"Name": "Smart 1",
+		"Type": "Earth",
+		"xCord": 1,
+		"yCord": 2
+	},
+	{
+		"LevelIdentifier":"1-1",
+		"Name": "Smart 2",
+		"Type": "Fire",
+		"xCord": 2,
+		"yCord": 2
+	},
+	{
+		"LevelIdentifier":"1-1",
+		"Name": "Smart 3",
+		"Type": "Water",
+		"xCord": 3,
+		"yCord": 2
+	},
+	{
+		"LevelIdentifier":"1-2",
+		"Name": "dumb 1",
+		"Type": "Earth",
+		"xCord": 1,
+		"yCord": 2
+	},
+	{
+		"LevelIdentifier":"1-2",
+		"Name": "dumb 2",
+		"Type": "Fire",
+		"xCord": 2,
+		"yCord": 2
+	}
+	]
+}
