@@ -74,26 +74,38 @@ public class BattleSystem : MonoBehaviour
 
 	IEnumerator EnemyTurn()
 	{
-		dialogueText.text = enemyUnit.unitName + " attacks!";
-
-		yield return new WaitForSeconds(1f);
-
-		bool isDead = playerUnit.TakeDamage(enemyUnit.damage);
-
-		playerHUD.SetHP(playerUnit.currentHP);
-
-		yield return new WaitForSeconds(1f);
-
-		if (isDead)
-		{
-			state = BattleState.LOST;
-			EndBattle();
-		}
-		else
-		{
-			state = BattleState.PLAYERTURN;
+		if (enemyUnit.isStunned == true)
+        {
+			dialogueText.text = enemyUnit.unitName + " is stunned!";
+			yield return new WaitForSeconds(1f);
+			enemyUnit.isStunned = false;
+			state = BattleState.PLAYERTURN; //make this next turn function
 			PlayerTurn();
 		}
+        else
+        {
+			dialogueText.text = enemyUnit.unitName + " attacks!";
+
+			yield return new WaitForSeconds(1f);
+
+			bool isDead = playerUnit.TakeDamage(enemyUnit.damage);
+
+			playerHUD.SetHP(playerUnit.currentHP);
+
+			yield return new WaitForSeconds(1f);
+
+			if (isDead)
+			{
+				state = BattleState.LOST;
+				EndBattle();
+			}
+			else
+			{
+				state = BattleState.PLAYERTURN;
+				PlayerTurn();
+			}
+		}
+		
 
 	}
 
@@ -127,6 +139,19 @@ public class BattleSystem : MonoBehaviour
 		StartCoroutine(EnemyTurn());
 	}
 
+	IEnumerator PlayerStun()
+	{
+		enemyUnit.isStunned = true;
+
+		dialogueText.text = "You stunned " + enemyUnit.unitName;
+
+		yield return new WaitForSeconds(2f);
+		
+
+		state = BattleState.ENEMYTURN;
+		StartCoroutine(EnemyTurn());
+	}
+
 	public void OnAttackButton()
 	{
 		if (state != BattleState.PLAYERTURN)
@@ -143,4 +168,11 @@ public class BattleSystem : MonoBehaviour
 		StartCoroutine(PlayerHeal());
 	}
 
+	public void OnStunButton()
+	{
+		if (state != BattleState.PLAYERTURN)
+			return;
+
+		StartCoroutine(PlayerStun());
+	}
 }

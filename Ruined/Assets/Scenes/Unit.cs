@@ -9,6 +9,7 @@ public class Unit : MonoBehaviour
 	public int damage;
 	public int maxHP;
 	public int currentHP;
+	public bool isStunned;
 
 	public bool TakeDamage(int dmg)
 	{
