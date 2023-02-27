@@ -164,6 +164,11 @@ public class LevelSelector : MonoBehaviour
 
                 }
                 break;
+            case "boss":
+                if (currentSceneLevel == 1){
+                    changeColorToYellow(Start1);
+                }
+                break;
         }
     }
 
@@ -183,6 +188,7 @@ public class LevelSelector : MonoBehaviour
         Debug.Log(areaLevel);
 
         Button button = EventSystem.current.currentSelectedGameObject.GetComponent<Button>();
+
         if (button != null) {
             ColorBlock colors = button.colors;
             if (colors.normalColor == Color.yellow) {
