@@ -48,7 +48,7 @@ public class GenerateEnemy : MonoBehaviour
 
             //int[] loc = new int[] { possibleLocations[locIndex-1, 0], possibleLocations[locIndex - 1, 1] };
 
-            EnemyTest.transform.position = new Vector3(buttonMapping[enemyDataList[i].location].transform.position.x, buttonMapping[enemyDataList[i].location].transform.position.y, -0.24f);
+            EnemyTest.transform.position = new Vector3(buttonMapping[enemyDataList[i].location].transform.position.x, buttonMapping[enemyDataList[i].location].transform.position.y, 0.40f);
         }
     }
 
