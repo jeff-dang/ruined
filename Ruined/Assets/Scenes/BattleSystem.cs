@@ -56,10 +56,10 @@ public class BattleSystem : MonoBehaviour
 	//implement last enumerator that just starts player turn()
 	IEnumerator SetupBattle()
 	{
-		GameObject playerGO = Instantiate(playerPrefab, playerStart);
-		playerUnit = playerGO.GetComponent<Unit>();
+		//GameObject playerGO = Instantiate(playerPrefab, playerStart);
+		playerUnit = playerPrefab.GetComponent<Unit>();
 
-		GameObject enemyGO = Instantiate(enemyPrefab, enemyStart);
+		GameObject enemyGO = Instantiate(enemyPrefab, enemyStart);  //bilal enemy script
 		enemyUnit = enemyGO.GetComponent<Unit>();
 
 		GameObject enemy2GO = Instantiate(enemy2Prefab, enemy2Start);
