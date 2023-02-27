@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class grid : MonoBehaviour
+/*public class grid : MonoBehaviour
 {
     PLAYER_GRID = [0, 0, 0, 0, 0, 0, 0, 0, 0]
     ENEMY_GRID = [0, 0, 0, 0, 0, 0, 0, 0, 0]
@@ -18,4 +18,4 @@ public class grid : MonoBehaviour
     {
         
     }
-}
+}*/
