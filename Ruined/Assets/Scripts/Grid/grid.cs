@@ -6,20 +6,20 @@ using UnityEngine.UI;
 public class Grid : MonoBehaviour
 {
 
-    public Button b0;
-    public Button b1;
-    public Button b2;
-    public Button b3;
-    public Button b4;
-    public Button b5;
-    public Button b6;
-    public Button b7;
-    public Button b8;
+    Button b0;
+    Button b1;
+    Button b2;
+    Button b3;
+    Button b4;
+    Button b5;
+    Button b6;
+    Button b7;
+    Button b8;
 
-    public Button[] PLAYER_GRID;
-    public int[] ENEMY_GRID; // x,y coordinates with all the possible locations
+    Button[] PLAYER_GRID;
+    int[] ENEMY_GRID; // x,y coordinates with all the possible locations
 
-    public GameObject player;
+    GameObject player;
 
     int playerLocation = 4;
 
@@ -84,11 +84,40 @@ public class Grid : MonoBehaviour
         button.colors = color;
     }
 
+    void loadBackgroundImage(string element) {
+        Image image = GameObject.Find("Background").GetComponent<Image>();
+        if(element == "Earth") {
+            Sprite backgroundImage = Resources.Load<Sprite>("Forest");
+            image.sprite = backgroundImage;
+        } else if (element == "Air") {
+            Sprite backgroundImage = Resources.Load<Sprite>("Mist");
+            image.sprite = backgroundImage;
+        } else if(element == "Fire") {
+            Sprite backgroundImage = Resources.Load<Sprite>("Volcano");
+            image.sprite = backgroundImage;
+        } else if(element == "Water") {
+            Sprite backgroundImage = Resources.Load<Sprite>("Swamp");
+            image.sprite = backgroundImage;
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
+        b0 = GameObject.Find("PlayerGrid/Button").GetComponent<Button>();
+        b1 = GameObject.Find("PlayerGrid/Button (1)").GetComponent<Button>();
+        b2 = GameObject.Find("PlayerGrid/Button (2)").GetComponent<Button>();
+        b3 = GameObject.Find("PlayerGrid/Button (3)").GetComponent<Button>();
+        b4 = GameObject.Find("PlayerGrid/Button (4)").GetComponent<Button>();
+        b5 = GameObject.Find("PlayerGrid/Button (5)").GetComponent<Button>();
+        b6 = GameObject.Find("PlayerGrid/Button (6)").GetComponent<Button>();
+        b7 = GameObject.Find("PlayerGrid/Button (7)").GetComponent<Button>();
+        b8 = GameObject.Find("PlayerGrid/Button (8)").GetComponent<Button>();
+        player = GameObject.Find("Player");
         PLAYER_GRID = new Button[] {b0, b1, b2, b3, b4, b5, b6, b7, b8};
         ENEMY_GRID = new int[] {0, 0, 0, 0, 0, 0, 0, 0, 0};
+        // Set background image dynamically
+        loadBackgroundImage("Earth");
         // player = GameObject.Find("Player");
     }
 
