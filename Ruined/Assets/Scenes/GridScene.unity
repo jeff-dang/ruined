@@ -982,7 +982,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 1
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 226018266}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -2090,6 +2090,7 @@ GameObject:
   m_Component:
   - component: {fileID: 985536939}
   - component: {fileID: 985536938}
+  - component: {fileID: 985536940}
   m_Layer: 0
   m_Name: Grid
   m_TagString: Untagged
@@ -2137,6 +2138,29 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &985536940
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 985536937}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b04860ea9ee7e7488901d3e9a4d6169, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  img: {fileID: 21300000, guid: c784356b3f7c0354d95fafe41686b13d, type: 3}
+  levelName: 1-1
+  b0: {fileID: 1903444094}
+  b1: {fileID: 194496681}
+  b2: {fileID: 340592309}
+  b3: {fileID: 752458612}
+  b4: {fileID: 213871400}
+  b5: {fileID: 1219282062}
+  b6: {fileID: 532154724}
+  b7: {fileID: 571160946}
+  b8: {fileID: 1074418244}
 --- !u!1 &1052598424
 GameObject:
   m_ObjectHideFlags: 0
