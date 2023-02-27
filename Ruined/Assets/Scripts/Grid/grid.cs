@@ -21,13 +21,14 @@ public class Grid : MonoBehaviour
 
     public GameObject player;
 
+    int playerLocation = 4;
+
     public void movePlayer(int tileIndex) {
-        // EventSystem currentEvent = EventSystem.current;  
-        // GameObject selectedBtn = currentEvent.currentSelectedGameObject;
         Transform transform = PLAYER_GRID[tileIndex].transform;
-        Debug.Log("Player's position BEFORE moving: " + player.transform.position);
+        // Debug.Log("Player's position BEFORE moving: " + player.transform.position);
         player.transform.position = transform.position;
-        Debug.Log("Player's position AFTER moving: " + player.transform.position);
+        // Debug.Log("Player's position AFTER moving: " + player.transform.position);
+        playerLocation = tileIndex;
     }
 
     // Shows where can enemy attack on the player's grid
@@ -52,10 +53,6 @@ public class Grid : MonoBehaviour
     }
 
     public void getPossibleLocations() {
-        
-    }
-
-    public void getButtonLocation(Button button) {
         
     }
 
