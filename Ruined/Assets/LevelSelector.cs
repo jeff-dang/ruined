@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 public class LevelSelector : MonoBehaviour
 {
 
-    List<string> buttonStrings = new List<string>{"Level 1", "Level 2", "Level 3", "Level 4"};
 
     // Start is called before the first frame update
     void Start()
@@ -27,48 +26,16 @@ public class LevelSelector : MonoBehaviour
         
     // }
 
-    public void OpenScene(string scene) {
-        Debug.Log("TEST 1");
-        if(scene == "forest"){
-            Debug.Log("TEST forest");
-            SceneManager.LoadScene("Level 1");
-            SceneManager.sceneLoaded += OnSceneLoaded;
-        }
-        if(scene == "swamp"){
-            Debug.Log("TEST swamp");
-            SceneManager.LoadScene("Level 2");
-            SceneManager.sceneLoaded += OnSceneLoaded;
-        }
-        if(scene == "volcano"){
-            Debug.Log("TEST volcano");
-            SceneManager.LoadScene("Level 3");
-            SceneManager.sceneLoaded += OnSceneLoaded;
-        }
-        if(scene == "boss"){
-            Debug.Log("TEST boss");
-            SceneManager.LoadScene("Level 4");
-            SceneManager.sceneLoaded += OnSceneLoaded;
-        }
-    }
+    public void OpenScene(string sceneArea) {
+        int index = sceneArea.LastIndexOfAny("0123456789".ToCharArray());
 
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        SceneManager.sceneLoaded -= OnSceneLoaded;
-        if (scene.name == "Level 1")
-        {
-            // NextSceneScript.LevelName = "Level 1";
-        }
-        if (scene.name == "Level 2")
-        {
-            // NextSceneScript.LevelName = "Level 2";
-        }
-        if (scene.name == "Level 3")
-        {
-            // NextSceneScript.LevelName = "Level 3";
-        }
-        if (scene.name == "Level 4")
-        {
-            // NextSceneScript.LevelName = "Level 4";
-        }
+        string areaName = sceneArea.Substring(0, index);
+        int areaLevel = int.Parse(sceneArea.Substring(index));
+
+        PlayerPrefs.SetString("areaName", areaName);
+        PlayerPrefs.SetInt("areaLevel", areaLevel);
+        Debug.Log(areaName);
+        Debug.Log(areaLevel);
+        SceneManager.LoadScene("GridScene");
     }
 }
