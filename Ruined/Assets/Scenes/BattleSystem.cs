@@ -10,21 +10,21 @@ public class BattleSystem : MonoBehaviour
 {
 
 	public GameObject playerPrefab;
-	public GameObject enemyPrefab;
+	public GameObject enemyPrefab;  //enemy loop here
 	public GameObject enemy2Prefab;
 
 	public Transform playerStart;
-	public Transform enemyStart;
+	public Transform enemyStart;   //enemy loop here
 	public Transform enemy2Start;
 
 	Unit playerUnit;
-	Unit enemyUnit;
+	Unit enemyUnit;  //enemy loop here
 	Unit enemy2Unit;
 
 	public TextMeshProUGUI dialogueText;
 
 	public BattleHUD playerHUD;
-	public BattleHUD enemyHUD;
+	public BattleHUD enemyHUD; //enemy loop here
 	public BattleHUD enemy2HUD;
 
 	public BattleState state;
@@ -38,7 +38,7 @@ public class BattleSystem : MonoBehaviour
 		StartCoroutine(SetupBattle());
 	}
 
-	IEnumerator nextEnemyTurn(string nextEnemy)
+	IEnumerator nextEnemyTurn(string nextEnemy) //enemy loop here
     {
 		if (nextEnemy == "enemy")
         {
@@ -49,7 +49,7 @@ public class BattleSystem : MonoBehaviour
         }
         else
         {
-			Debug.Log("hello");
+			Debug.Log("hello");  //this failsafe catch remove after
 			return SetupBattle();
         }
     }
@@ -67,8 +67,8 @@ public class BattleSystem : MonoBehaviour
 
 		dialogueText.text = "A wild " + enemyUnit.unitName + " approaches...";
 
-		playerHUD.SetHUD(playerUnit);
-		enemyHUD.SetHUD(enemyUnit);
+		playerHUD.SetHUD(playerUnit);   
+		enemyHUD.SetHUD(enemyUnit);    //enemy loop here
 		enemy2HUD.SetHUD(enemy2Unit);
 
 		yield return new WaitForSeconds(2f);
@@ -78,7 +78,7 @@ public class BattleSystem : MonoBehaviour
 	}
 
 
-	IEnumerator EnemyTurn()
+	IEnumerator EnemyTurn()    //enemy loop here + enemyturn2
 	{
 		if (enemyUnit.isStunned == true) 
         {
@@ -115,7 +115,7 @@ public class BattleSystem : MonoBehaviour
 
 	}
 
-	IEnumerator Enemy2Turn()
+	IEnumerator Enemy2Turn()  //remove this after enemy turn loop
 	{
 		if (enemyUnit.isStunned == true)
 		{
@@ -174,11 +174,11 @@ public class BattleSystem : MonoBehaviour
 	IEnumerator PlayerAttack()
 	{
 		state = BattleState.ENEMYTURN;
-		//check if enemy is in pattern and can just make another button that hard codes attack one
+		//check if enemy is in pattern and can just make another button that hard codes attack one  //enemy loop here
 		bool isDead = enemyUnit.TakeDamage(playerUnit.damage);
 		bool isDead2 = enemy2Unit.TakeDamage(playerUnit.damage);
 
-		enemyHUD.SetHP(enemyUnit.currentHP);
+		enemyHUD.SetHP(enemyUnit.currentHP);  //enemy loop here
 		enemy2HUD.SetHP(enemy2Unit.currentHP);
 		dialogueText.text = "The attack is successful!";
 
