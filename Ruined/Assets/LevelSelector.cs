@@ -5,10 +5,20 @@ using UnityEngine.SceneManagement;
 
 public class LevelSelector : MonoBehaviour
 {
+
+    List<string> buttonStrings = new List<string>{"Level 1", "Level 2", "Level 3", "Level 4"};
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        // //string levelCompleted = NextSceneScript.levelSelected;
+        // foreach(level in buttonStrings)
+        // {
+        //     //Button for level == unclickable
+        //     if(levelCompleted == level){
+        //         break;
+        //     }
+        // }
     }
 
     //     // Update is called once per frame
