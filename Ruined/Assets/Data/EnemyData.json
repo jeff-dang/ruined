@@ -1,0 +1,34 @@
+{
+	"data" : [
+	{
+		"LevelIdentifier":"1-1",
+		"Name": "Smart 1",
+		"Type": "Earth",
+		"location": 0
+	},
+	{
+		"LevelIdentifier":"1-1",
+		"Name": "Smart 2",
+		"Type": "Fire",
+		"location": 3
+	},
+	{
+		"LevelIdentifier":"1-1",
+		"Name": "Smart 3",
+		"Type": "Water",
+		"location": 4
+	},
+	{
+		"LevelIdentifier":"1-2",
+		"Name": "dumb 1",
+		"Type": "Earth",
+		"location": 5
+	},
+	{
+		"LevelIdentifier":"1-2",
+		"Name": "dumb 2",
+		"Type": "Fire",
+		"location": 0
+	}
+	]
+}
