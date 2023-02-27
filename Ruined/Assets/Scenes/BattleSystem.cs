@@ -77,29 +77,6 @@ public class BattleSystem : MonoBehaviour
 		PlayerTurn();
 	}
 
-	IEnumerator PlayerAttack()
-	{
-		//check if enemy is in pattern and can just make another button that hard codes attack one
-		bool isDead = enemyUnit.TakeDamage(playerUnit.damage);
-		bool isDead2 = enemy2Unit.TakeDamage(playerUnit.damage);
-
-		enemyHUD.SetHP(enemyUnit.currentHP);
-		enemy2HUD.SetHP(enemy2Unit.currentHP);
-		dialogueText.text = "The attack is successful!";
-
-		yield return new WaitForSeconds(2f);
-
-		if (isDead || isDead2)
-		{
-			state = BattleState.WON;
-			EndBattle();
-		}
-		else
-		{
-			state = BattleState.ENEMYTURN;
-			StartCoroutine(nextEnemyTurn("enemy"));
-		}
-	}
 
 	IEnumerator EnemyTurn()
 	{
@@ -192,6 +169,31 @@ public class BattleSystem : MonoBehaviour
 	void PlayerTurn()
 	{
 		dialogueText.text = "Choose an action:";
+	}
+
+	IEnumerator PlayerAttack()
+	{
+		state = BattleState.ENEMYTURN;
+		//check if enemy is in pattern and can just make another button that hard codes attack one
+		bool isDead = enemyUnit.TakeDamage(playerUnit.damage);
+		bool isDead2 = enemy2Unit.TakeDamage(playerUnit.damage);
+
+		enemyHUD.SetHP(enemyUnit.currentHP);
+		enemy2HUD.SetHP(enemy2Unit.currentHP);
+		dialogueText.text = "The attack is successful!";
+
+		yield return new WaitForSeconds(2f);
+
+		if (isDead || isDead2)
+		{
+			state = BattleState.WON;
+			EndBattle();
+		}
+		else
+		{
+			state = BattleState.ENEMYTURN;
+			StartCoroutine(nextEnemyTurn("enemy"));
+		}
 	}
 
 	IEnumerator PlayerHeal()
