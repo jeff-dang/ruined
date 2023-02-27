@@ -1940,7 +1940,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nameText: {fileID: 1587384386}
-  hpText: {fileID: 0}
+  hpText: {fileID: 991216117}
   hpSlider: {fileID: 1753199285}
 --- !u!224 &625852720
 RectTransform:
