@@ -84,6 +84,7 @@ public class BattleSystem : MonoBehaviour
             enemy.isStunned = false;
             enemy.unitName = enemyDataList[i].Name;
 			enemy.location = enemyDataList[i].location;
+			enemy.damage = enemyDataList[i].Damage;
 			enemyUnits.Add(enemy);
             EnemyGrid.transform.GetChild(i).gameObject.SetActive(true);
             EnemyGrid.transform.GetChild(i).gameObject.GetComponent<BattleHUD>().SetHUD(enemy);

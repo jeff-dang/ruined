@@ -5,7 +5,7 @@ using UnityEngine;
 
 public static class EnemyDataManager
 {
-    private static string directory = Application.dataPath + "/Data";
+    private static string directory = Application.dataPath + "/StreamingAssets";
     private static string fileName = "EnemyData.json";
 
     public static List<EnemyData> getEnemyData(string identifier)
