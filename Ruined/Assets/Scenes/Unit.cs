@@ -10,6 +10,7 @@ public class Unit : MonoBehaviour
 	public int maxHP;
 	public int currentHP;
 	public bool isStunned;
+	public int location;
 
 	public bool TakeDamage(int dmg)
 	{

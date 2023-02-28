@@ -52,11 +52,13 @@ public class Cards : MonoBehaviour
         card2.Damage = 2;
 
         card3.Name = "Horizontal Attack";
-        card3.Pattern = new int[] { 4, 5, 6 };
+        card3.Pattern = new int[] { 3, 4, 5 };
         card3.Damage = 3;
 
         Card[] availableCards = { card1, card2, card3 };
         GameObject buttonTemplate = transform.GetChild(0).gameObject;
+        GameObject buttonTemplate1 = transform.GetChild(1).gameObject;
+        GameObject buttonTemplate2 = transform.GetChild(2).gameObject;
         GameObject g;
 
 
@@ -66,9 +68,10 @@ public class Cards : MonoBehaviour
 
         for (int i = 0; i < N; i++)
         {
-            g = Instantiate(buttonTemplate, transform);
+            
             if (cardDeck[i] == 1)
             {
+                g = Instantiate(buttonTemplate, transform);
                 g.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = card1.Name;
                 g.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = card1.Damage.ToString();
                 int K = card1.Pattern.Length;
@@ -80,17 +83,19 @@ public class Cards : MonoBehaviour
             }
             else if (cardDeck[i] == 2)
             {
+                g = Instantiate(buttonTemplate1, transform);
                 g.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = card2.Name;
                 g.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = card2.Damage.ToString();
                 int K = card2.Pattern.Length;
                 for (int j = 0; j < K; j++)
                 {
-                    int pattern_square = card1.Pattern[j];
+                    int pattern_square = card2.Pattern[j];
                     g.transform.GetChild(pattern_square + 3).gameObject.GetComponent<Image>().color = Color.red;
                 }
             }
             else
             {
+                g = Instantiate(buttonTemplate2, transform);
                 g.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = card3.Name;
                 g.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = card3.Damage.ToString();
                 int K = card3.Pattern.Length;
@@ -129,6 +134,8 @@ public class Cards : MonoBehaviour
         }
 
         Destroy(buttonTemplate);
+        Destroy(buttonTemplate1);
+        Destroy(buttonTemplate2);
     }
 
     void ItemClicked(int itemIndex)
@@ -138,11 +145,11 @@ public class Cards : MonoBehaviour
         //Debug.Log("desc " + cardDeck[itemIndex].Damage.ToString());
     }
 
-    public void cardAttack(string s)
-    {
-        GameObject BattleSystemObj = GameObject.Find("BattleSystem");
-        BattleSystemObj.GetComponent<BattleSystem>().OnAttackButton();
-    }
+    //public void cardAttack(string s)
+    //{
+    //    GameObject BattleSystemObj = GameObject.Find("BattleSystem");
+    //    BattleSystemObj.GetComponent<BattleSystem>().OnAttackButton();
+    //}
 
     // Update is called once per frame
     void Update()

@@ -82,7 +82,8 @@ public class BattleSystem : MonoBehaviour
             enemy.maxHP = enemyDataList[i].HP;
             enemy.isStunned = false;
             enemy.unitName = enemyDataList[i].Name;
-            enemyUnits.Add(enemy);
+			enemy.location = enemyDataList[i].location;
+			enemyUnits.Add(enemy);
             EnemyGrid.transform.GetChild(i).gameObject.SetActive(true);
             EnemyGrid.transform.GetChild(i).gameObject.GetComponent<BattleHUD>().SetHUD(enemy);
         }
@@ -243,6 +244,131 @@ public class BattleSystem : MonoBehaviour
         }
 	}
 
+	IEnumerator PlayerWholeAttack()
+	{
+		state = BattleState.ENEMYTURN;
+		//check if enemy is in pattern and can just make another button that hard codes attack one  //enemy loop here
+		//bool isDead = enemyUnit.TakeDamage(playerUnit.damage);
+		//bool isDead2 = enemy2Unit.TakeDamage(playerUnit.damage);
+		//List<bool> deadUnits = new List<bool>();
+		bool foundDead = false;
+
+		for (int i = 0; i < enemyUnits.Count; i++)
+		{
+			if (enemyUnits[i].TakeDamage(2))
+				foundDead = true;
+		}
+
+
+		for (int i = 0; i < enemyDataList.Count; i++)
+		{
+			EnemyGrid.transform.GetChild(i).gameObject.GetComponent<BattleHUD>().SetHP(enemyUnits[i].currentHP);  //enemy loop here
+																												  //enemy2HUD.SetHP(enemy2Unit.currentHP);
+		}
+
+		dialogueText.text = "The attack is successful!";
+
+		yield return new WaitForSeconds(2f);
+
+
+		if (foundDead)
+		{
+			state = BattleState.WON;
+			EndBattle();
+		}
+		else
+		{
+			state = BattleState.ENEMYTURN;
+			yield return StartCoroutine(EnemyTurn(0));
+			state = BattleState.PLAYERTURN;
+			PlayerTurn();
+		}
+	}
+
+	IEnumerator PlayerLineAttack()
+	{
+		state = BattleState.ENEMYTURN;
+		//check if enemy is in pattern and can just make another button that hard codes attack one  //enemy loop here
+		//bool isDead = enemyUnit.TakeDamage(playerUnit.damage);
+		//bool isDead2 = enemy2Unit.TakeDamage(playerUnit.damage);
+		//List<bool> deadUnits = new List<bool>();
+		bool foundDead = false;
+
+		for (int i = 0; i < enemyUnits.Count; i++)
+		{
+			if (enemyUnits[i].location == 1 || enemyUnits[i].location == 4 || enemyUnits[i].location == 7)
+				if (enemyUnits[i].TakeDamage(3))
+					foundDead = true;
+		}
+
+
+		for (int i = 0; i < enemyDataList.Count; i++)
+		{
+			EnemyGrid.transform.GetChild(i).gameObject.GetComponent<BattleHUD>().SetHP(enemyUnits[i].currentHP);  //enemy loop here
+																												  //enemy2HUD.SetHP(enemy2Unit.currentHP);
+		}
+
+		dialogueText.text = "The attack is successful!";
+
+		yield return new WaitForSeconds(2f);
+
+
+		if (foundDead)
+		{
+			state = BattleState.WON;
+			EndBattle();
+		}
+		else
+		{
+			state = BattleState.ENEMYTURN;
+			yield return StartCoroutine(EnemyTurn(0));
+			state = BattleState.PLAYERTURN;
+			PlayerTurn();
+		}
+	}
+
+	IEnumerator PlayerHorizontalAttack()
+	{
+		state = BattleState.ENEMYTURN;
+		//check if enemy is in pattern and can just make another button that hard codes attack one  //enemy loop here
+		//bool isDead = enemyUnit.TakeDamage(playerUnit.damage);
+		//bool isDead2 = enemy2Unit.TakeDamage(playerUnit.damage);
+		//List<bool> deadUnits = new List<bool>();
+		bool foundDead = false;
+
+		for (int i = 0; i < enemyUnits.Count; i++)
+		{
+			if (enemyUnits[i].location == 3 || enemyUnits[i].location == 4 || enemyUnits[i].location == 5)
+				if (enemyUnits[i].TakeDamage(3))
+					foundDead = true;
+		}
+
+
+		for (int i = 0; i < enemyDataList.Count; i++)
+		{
+			EnemyGrid.transform.GetChild(i).gameObject.GetComponent<BattleHUD>().SetHP(enemyUnits[i].currentHP);  //enemy loop here
+																												  //enemy2HUD.SetHP(enemy2Unit.currentHP);
+		}
+
+		dialogueText.text = "The attack is successful!";
+
+		yield return new WaitForSeconds(2f);
+
+
+		if (foundDead)
+		{
+			state = BattleState.WON;
+			EndBattle();
+		}
+		else
+		{
+			state = BattleState.ENEMYTURN;
+			yield return StartCoroutine(EnemyTurn(0));
+			state = BattleState.PLAYERTURN;
+			PlayerTurn();
+		}
+	}
+
 	IEnumerator PlayerHeal()
 	{
 		playerUnit.Heal(5);
@@ -284,12 +410,28 @@ public class BattleSystem : MonoBehaviour
         PlayerTurn();// nextEnemyTurn("enemy"));
     }
 
-	public void OnAttackButton()
+	public void OnWholeAttackButton()
 	{
 		if (state != BattleState.PLAYERTURN)
 			return;
 
-		StartCoroutine(PlayerAttack());
+		StartCoroutine(PlayerWholeAttack());
+	}
+
+	public void OnLineAttackButton()
+	{
+		if (state != BattleState.PLAYERTURN)
+			return;
+
+		StartCoroutine(PlayerLineAttack());
+	}
+
+	public void OnHorizontalAttackButton()
+	{
+		if (state != BattleState.PLAYERTURN)
+			return;
+
+		StartCoroutine(PlayerHorizontalAttack());
 	}
 
 	public void OnHealButton()
