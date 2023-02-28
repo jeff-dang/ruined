@@ -4221,6 +4221,7 @@ MonoBehaviour:
   maxHP: 10
   currentHP: 5
   isStunned: 0
+  location: 0
 --- !u!1 &526963780
 GameObject:
   m_ObjectHideFlags: 0
@@ -4271,6 +4272,7 @@ MonoBehaviour:
   maxHP: 10
   currentHP: 10
   isStunned: 0
+  location: 0
 --- !u!212 &526963783
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -6621,6 +6623,7 @@ MonoBehaviour:
   maxHP: 10
   currentHP: 5
   isStunned: 0
+  location: 0
 --- !u!212 &782068542
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -10839,6 +10842,7 @@ MonoBehaviour:
   maxHP: 10
   currentHP: 3
   isStunned: 0
+  location: 0
 --- !u!212 &1474483756
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -12813,7 +12817,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40036512cdaa16e4ba60add16e79146b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardDeck: 00000000
+  cardDeck: 010000000200000003000000
 --- !u!114 &1994878004
 MonoBehaviour:
   m_ObjectHideFlags: 0
