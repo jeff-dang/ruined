@@ -23,32 +23,103 @@ public class Cards : MonoBehaviour
         public string Name;
         public int[] Pattern;
         public int Damage;
-        public Sprite Icon;
+        //public Sprite Icon;
     }
 
-    [SerializeField] Card[] cardDeck;
+    //map card here
+   
+    
+   
+    
+
+
+    
+    //[SerializeField] Card[] cardDeck;
+    [SerializeField] int[] cardDeck;
+
 
     void Start()
     {
+        Card card1;
+        Card card2;
+        Card card3;
+        card1.Name = "Line Attack";
+        card1.Pattern = new int[]{ 1,4,7 };
+        card1.Damage = 3;
+
+        card2.Name = "Whole";
+        card2.Pattern = new int[] { 0,1,2,3, 4,5,6,7,8 };
+        card2.Damage = 2;
+
+        card3.Name = "Horizontal Attack";
+        card3.Pattern = new int[] { 4, 5, 6 };
+        card3.Damage = 3;
+
+        Card[] availableCards = { card1, card2, card3 };
         GameObject buttonTemplate = transform.GetChild(0).gameObject;
         GameObject g;
 
+
+        
 
         int N = cardDeck.Length;
 
         for (int i = 0; i < N; i++)
         {
             g = Instantiate(buttonTemplate, transform);
-            Debug.Log(g.transform.GetChild(0).gameObject.name);
-            g.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = cardDeck[i].Name;
-            g.transform.GetChild(1).gameObject.GetComponent<Image>().sprite = cardDeck[i].Icon;
-            g.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = cardDeck[i].Damage.ToString();
-            int K = cardDeck[i].Pattern.Length;
-            for (int j = 0;j < K; j++)
+            if (cardDeck[i] == 1)
             {
-                int pattern_square = cardDeck[i].Pattern[j]; //gives u square
-                g.transform.GetChild(pattern_square + 3).gameObject.GetComponent<Image>().color = Color.red;
-                    }
+                g.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = card1.Name;
+                g.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = card1.Damage.ToString();
+                int K = card1.Pattern.Length;
+                for (int j=0;j < K; j++)
+                {
+                    int pattern_square = card1.Pattern[j];
+                    g.transform.GetChild(pattern_square + 3).gameObject.GetComponent<Image>().color = Color.red;
+                }
+            }
+            else if (cardDeck[i] == 2)
+            {
+                g.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = card2.Name;
+                g.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = card2.Damage.ToString();
+                int K = card2.Pattern.Length;
+                for (int j = 0; j < K; j++)
+                {
+                    int pattern_square = card1.Pattern[j];
+                    g.transform.GetChild(pattern_square + 3).gameObject.GetComponent<Image>().color = Color.red;
+                }
+            }
+            else
+            {
+                g.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = card3.Name;
+                g.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = card3.Damage.ToString();
+                int K = card3.Pattern.Length;
+                for (int j = 0; j < K; j++)
+                {
+                    int pattern_square = card3.Pattern[j];
+                    g.transform.GetChild(pattern_square + 3).gameObject.GetComponent<Image>().color = Color.red;
+                }
+            }
+            //g.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = cardDeck[i].Name;
+            ////g.transform.GetChild(1).gameObject.GetComponent<Image>().sprite = cardDeck[i].Icon;
+            //g.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = cardDeck[i].Damage.ToString();
+            //int K = cardDeck[i].Pattern.Length;
+            //for (int j = 0; j < K; j++)
+            //{
+            //    int pattern_square = cardDeck[i].Pattern[j]; //gives u square
+            //    g.transform.GetChild(pattern_square + 3).gameObject.GetComponent<Image>().color = Color.red;
+            //}
+            //g.transform.GetChild(2).GetComponent<Text>().text = cardDeck[i].Pattern;
+            //Debug.Log(g.transform.GetChild(0).gameObject.name);
+            //g.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = cardDeck[i].Name;
+            ////g.transform.GetChild(1).gameObject.GetComponent<Image>().sprite = cardDeck[i].Icon;
+            //g.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = cardDeck[i].Damage.ToString();
+            //int K = cardDeck[i].Pattern.Length;
+            //for (int j = 0;j < K; j++)
+            //{
+            //    int pattern_square = cardDeck[i].Pattern[j]; //gives u square
+            //    g.transform.GetChild(pattern_square + 3).gameObject.GetComponent<Image>().color = Color.red;
+            //        }
             //g.transform.GetChild(2).GetComponent<Text>().text = cardDeck[i].Pattern;
 
             /*g.GetComponent <Button> ().onClick.AddListener (delegate() {
@@ -62,9 +133,15 @@ public class Cards : MonoBehaviour
 
     void ItemClicked(int itemIndex)
     {
-        Debug.Log("------------item " + itemIndex + " clicked---------------");
-        Debug.Log("name " + cardDeck[itemIndex].Name);
-        Debug.Log("desc " + cardDeck[itemIndex].Damage.ToString());
+        //Debug.Log("------------item " + itemIndex + " clicked---------------");
+        //Debug.Log("name " + cardDeck[itemIndex].Name);
+        //Debug.Log("desc " + cardDeck[itemIndex].Damage.ToString());
+    }
+
+    public void cardAttack(string s)
+    {
+        GameObject BattleSystemObj = GameObject.Find("BattleSystem");
+        BattleSystemObj.GetComponent<BattleSystem>().OnAttackButton();
     }
 
     // Update is called once per frame
