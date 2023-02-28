@@ -1,0 +1,44 @@
+{
+	"data" : [
+	{
+		"LevelIdentifier":"1-1",
+		"Name": "Smart 1",
+		"Type": "Earth",
+		"location": 0,
+		"Damage": 3,
+		"HP": 10
+	},
+	{
+		"LevelIdentifier":"1-1",
+		"Name": "Smart 2",
+		"Type": "Fire",
+		"location": 3,
+		"Damage": 1,
+		"HP": 7
+	},
+	{
+		"LevelIdentifier":"1-1",
+		"Name": "Smart 3",
+		"Type": "Water",
+		"location": 4,
+		"Damage": 4,
+		"HP": 15
+	},
+	{
+		"LevelIdentifier":"1-2",
+		"Name": "dumb 1",
+		"Type": "Earth",
+		"location": 5,
+		"Damage": 4,
+		"HP": 12
+	},
+	{
+		"LevelIdentifier":"1-2",
+		"Name": "dumb 2",
+		"Type": "Fire",
+		"location": 0,
+		"Damage": 5,
+		"HP": 9
+	}
+	]
+}
