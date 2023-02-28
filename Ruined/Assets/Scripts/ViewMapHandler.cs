@@ -11,7 +11,10 @@ public class ViewMapHandler : MonoBehaviour
 
     public void onViewMapButtonClick()
     {
-        SceneManager.LoadScene("GridScene");
+        PlayerPrefs.SetString("areaName", "start");
+        PlayerPrefs.SetInt("areaLevel", 1);
+        SceneManager.LoadScene("MapScene");
+
         //MapScreen.GetComponent<CanvasGroup>().alpha = 1f;
     
         /*if (mapCanvasGroup.alpha == 0f) {

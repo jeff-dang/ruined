@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Grid : MonoBehaviour
 {
@@ -20,6 +21,7 @@ public class Grid : MonoBehaviour
     int[] ENEMY_GRID; // x,y coordinates with all the possible locations
 
     GameObject player;
+    CanvasGroup staticMap;
 
     int playerLocation = 4;
 
@@ -101,6 +103,26 @@ public class Grid : MonoBehaviour
         }
     }
 
+    public void closeStaticMap() {
+        staticMap.alpha = 0;
+        staticMap.interactable = false;
+        staticMap.blocksRaycasts = false;
+    }
+
+    public void openStaticMap() {
+        staticMap.alpha = 1;
+        staticMap.interactable = true;
+        staticMap.blocksRaycasts = true;
+    }
+
+    public void goToMainMenu() {
+        SceneManager.LoadScene("UserInterfaceScene");
+    }
+
+    public void goToMap() {
+        SceneManager.LoadScene("MapScene");
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -114,6 +136,7 @@ public class Grid : MonoBehaviour
         b7 = GameObject.Find("PlayerGrid/Button (7)").GetComponent<Button>();
         b8 = GameObject.Find("PlayerGrid/Button (8)").GetComponent<Button>();
         player = GameObject.Find("Player");
+        staticMap = GameObject.Find("MenuPeak").GetComponent<CanvasGroup>();
         PLAYER_GRID = new Button[] {b0, b1, b2, b3, b4, b5, b6, b7, b8};
         ENEMY_GRID = new int[] {0, 0, 0, 0, 0, 0, 0, 0, 0};
         // Set background image dynamically

@@ -172,12 +172,6 @@ public class LevelSelector : MonoBehaviour
         }
     }
 
-    //     // Update is called once per frame
-    // void Update()
-    // {
-        
-    // }
-
     public void OpenScene(string sceneArea) {
 
         int index = sceneArea.LastIndexOfAny("0123456789".ToCharArray());
