@@ -8,6 +8,7 @@ public enum BattleState { START, PLAYERTURN, ENEMYTURN, WON, LOST }
 
 public class BattleSystem : MonoBehaviour
 {
+    public string level;
 
 	public GameObject playerPrefab;
 	public GameObject enemyPrefab;  //enemy loop here
@@ -17,15 +18,21 @@ public class BattleSystem : MonoBehaviour
 	public Transform enemyStart;   //enemy loop here
 	public Transform enemy2Start;
 
-	Unit playerUnit;
-	Unit enemyUnit;  //enemy loop here
-	Unit enemy2Unit;
+    //public GameObject Grid;
+    public GameObject EnemyGrid;
 
-	public TextMeshProUGUI dialogueText;
+	Unit playerUnit;
+	//Unit enemyUnit;  //enemy loop here
+	//Unit enemy2Unit;
+    private List<EnemyData> enemyDataList;
+    private List<Unit> enemyUnits;
+
+
+    public TextMeshProUGUI dialogueText;
 
 	public BattleHUD playerHUD;
-	public BattleHUD enemyHUD; //enemy loop here
-	public BattleHUD enemy2HUD;
+	//public BattleHUD enemyHUD; //enemy loop here
+	//public BattleHUD enemy2HUD;
 
 	public BattleState state;
 
@@ -38,38 +45,53 @@ public class BattleSystem : MonoBehaviour
 		StartCoroutine(SetupBattle());
 	}
 
-	IEnumerator nextEnemyTurn(string nextEnemy) //enemy loop here
-    {
-		if (nextEnemy == "enemy")
-        {
-			return EnemyTurn();
-        }
-		else if (nextEnemy == "enemy2") {
-			return Enemy2Turn();
-        }
-        else
-        {
-			Debug.Log("hello");  //this failsafe catch remove after
-			return SetupBattle();
-        }
-    }
-	//implement last enumerator that just starts player turn()
-	IEnumerator SetupBattle()
+    //ienumerator nextenemyturn(string nextenemy) //enemy loop here
+    //   {
+    //	if (nextenemy == "enemy")
+    //       {
+    //		return enemyturn();
+    //       }
+    //	else if (nextenemy == "enemy2") {
+    //		return enemy2turn();
+    //       }
+    //       else
+    //       {
+    //		debug.log("hello");  //this failsafe catch remove after
+    //		return setupbattle();
+    //       }
+    //   }
+    //implement last enumerator that just starts player turn()
+    IEnumerator SetupBattle()
 	{
 		//GameObject playerGO = Instantiate(playerPrefab, playerStart);
 		playerUnit = playerPrefab.GetComponent<Unit>();
 
-		GameObject enemyGO = Instantiate(enemyPrefab, enemyStart);  //bilal enemy script
-		enemyUnit = enemyGO.GetComponent<Unit>();
+        enemyDataList = EnemyDataManager.getEnemyData(level);
+        enemyUnits = new List<Unit>();
 
-		GameObject enemy2GO = Instantiate(enemy2Prefab, enemy2Start);
-		enemy2Unit = enemy2GO.GetComponent<Unit>();
+        //GameObject enemyGO = Instantiate(enemyPrefab, enemyStart);  //bilal enemy script
+		//enemyUnit = enemyGO.GetComponent<Unit>();
 
-		dialogueText.text = "A wild " + enemyUnit.unitName + " approaches...";
+		//GameObject enemy2GO = Instantiate(enemy2Prefab, enemy2Start);
+		//enemy2Unit = enemy2GO.GetComponent<Unit>();
+
+        for (int i = 0; i < enemyDataList.Count; i++)
+        {
+            Unit enemy = new Unit();
+            enemy.currentHP = enemyDataList[i].HP;
+            enemy.maxHP = enemyDataList[i].HP;
+            enemy.isStunned = false;
+            enemy.unitName = enemyDataList[i].Name;
+            enemyUnits.Add(enemy);
+            EnemyGrid.transform.GetChild(i).gameObject.SetActive(true);
+            EnemyGrid.transform.GetChild(i).gameObject.GetComponent<BattleHUD>().SetHUD(enemy);
+        }
+
+		dialogueText.text = "A wild " + enemyUnits[0].unitName + " approaches...";
 
 		playerHUD.SetHUD(playerUnit);   
-		enemyHUD.SetHUD(enemyUnit);    //enemy loop here
-		enemy2HUD.SetHUD(enemy2Unit);
+		//enemyHUD.SetHUD(enemyUnit);    //enemy loop here
+		//enemy2HUD.SetHUD(enemy2Unit);
 
 		yield return new WaitForSeconds(2f);
 
@@ -78,82 +100,91 @@ public class BattleSystem : MonoBehaviour
 	}
 
 
-	IEnumerator EnemyTurn()    //enemy loop here + enemyturn2
+	IEnumerator EnemyTurn(int enemyNum)    //enemy loop here + enemyturn2
 	{
-		if (enemyUnit.isStunned == true) 
+        Unit enemyUnit = enemyUnits[enemyNum];
+        if (enemyUnit.isStunned == true)
         {
-			dialogueText.text = enemyUnit.unitName + " is stunned!";
-			yield return new WaitForSeconds(1f);
-			enemyUnit.isStunned = false;
-			state = BattleState.ENEMYTURN; //make this next turn function
-			StartCoroutine(nextEnemyTurn("enemy2")); ;  //here would call next enemy turn
-		}
+            dialogueText.text = enemyUnits[enemyNum].unitName + " is stunned!";
+            yield return new WaitForSeconds(1f);
+            enemyUnits[enemyNum].isStunned = false;
+            state = BattleState.ENEMYTURN; //make this next turn function
+            if (enemyNum + 1 < enemyUnits.Count)
+                yield return StartCoroutine(EnemyTurn(enemyNum+1));
+            //here would call next enemy turn
+        }
         else
         {
-			dialogueText.text = enemyUnit.unitName + " attacks!";
+            dialogueText.text = enemyUnits[enemyNum].unitName + " attacks!";
 
-			yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(1f);
 
-			bool isDead = playerUnit.TakeDamage(enemyUnit.damage);
+            bool isDead = playerUnit.TakeDamage(enemyUnits[enemyNum].damage);
 
-			playerHUD.SetHP(playerUnit.currentHP);
+            playerHUD.SetHP(playerUnit.currentHP);
 
-			yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(1f);
 
-			if (isDead)
-			{
-				state = BattleState.LOST;
-				EndBattle();
-			}
-			else
-			{
-				state = BattleState.ENEMYTURN;
-				StartCoroutine(nextEnemyTurn("enemy2")); ;
-			}
-		}
-		
+            if (isDead)
+            {
+                state = BattleState.LOST;
+                EndBattle();
+            }
+            else
+            {
+                state = BattleState.ENEMYTURN;
+                if (enemyNum + 1 < enemyUnits.Count)
+                    yield return StartCoroutine(EnemyTurn(enemyNum+1));
+            }
+        }
+    }
 
-	}
+	//IEnumerator Enemy2Turn()  //remove this after enemy turn loop
+	//{
+	//	if (enemyUnit.isStunned == true)
+	//	{
+	//		dialogueText.text = enemy2Unit.unitName + " is stunned!";
+	//		yield return new WaitForSeconds(1f);
+	//		enemyUnit.isStunned = false;
+	//		state = BattleState.PLAYERTURN; //make this next turn function
+	//		PlayerTurn();
+	//	}
+	//	else
+	//	{
+	//		dialogueText.text = enemy2Unit.unitName + " attacks!";
 
-	IEnumerator Enemy2Turn()  //remove this after enemy turn loop
-	{
-		if (enemyUnit.isStunned == true)
-		{
-			dialogueText.text = enemy2Unit.unitName + " is stunned!";
-			yield return new WaitForSeconds(1f);
-			enemyUnit.isStunned = false;
-			state = BattleState.PLAYERTURN; //make this next turn function
-			PlayerTurn();
-		}
-		else
-		{
-			dialogueText.text = enemy2Unit.unitName + " attacks!";
+	//		yield return new WaitForSeconds(1f);
 
-			yield return new WaitForSeconds(1f);
+	//		bool isDead = playerUnit.TakeDamage(enemy2Unit.damage);
 
-			bool isDead = playerUnit.TakeDamage(enemy2Unit.damage);
+	//		playerHUD.SetHP(playerUnit.currentHP);
 
-			playerHUD.SetHP(playerUnit.currentHP);
+	//		yield return new WaitForSeconds(1f);
 
-			yield return new WaitForSeconds(1f);
-
-			if (isDead)
-			{
-				state = BattleState.LOST;
-				EndBattle();
-			}
-			else
-			{
-				state = BattleState.PLAYERTURN;
-				PlayerTurn();
-			}
-		}
+	//		if (isDead)
+	//		{
+	//			state = BattleState.LOST;
+	//			EndBattle();
+	//		}
+	//		else
+	//		{
+	//			state = BattleState.PLAYERTURN;
+	//			PlayerTurn();
+	//		}
+	//	}
 
 
-	}
+	//}
 
 	void EndBattle()
 	{
+
+        for (int i = 0; i < enemyUnits.Count; i++)
+        {
+            GameObject.Find(enemyUnits[i].unitName).gameObject.SetActive(false);
+        }
+
+
 		if (state == BattleState.WON)
 		{
 			dialogueText.text = "You won the battle!";
@@ -174,17 +205,31 @@ public class BattleSystem : MonoBehaviour
 	IEnumerator PlayerAttack()
 	{
 		state = BattleState.ENEMYTURN;
-		//check if enemy is in pattern and can just make another button that hard codes attack one  //enemy loop here
-		bool isDead = enemyUnit.TakeDamage(playerUnit.damage);
-		bool isDead2 = enemy2Unit.TakeDamage(playerUnit.damage);
+        //check if enemy is in pattern and can just make another button that hard codes attack one  //enemy loop here
+        //bool isDead = enemyUnit.TakeDamage(playerUnit.damage);
+        //bool isDead2 = enemy2Unit.TakeDamage(playerUnit.damage);
+        //List<bool> deadUnits = new List<bool>();
+        bool foundDead = false;
 
-		enemyHUD.SetHP(enemyUnit.currentHP);  //enemy loop here
-		enemy2HUD.SetHP(enemy2Unit.currentHP);
-		dialogueText.text = "The attack is successful!";
+        for (int i = 0; i < enemyUnits.Count; i++)
+        {
+            if (enemyUnits[i].TakeDamage(playerUnit.damage))
+                foundDead = true;
+        }
+
+
+        for (int i = 0; i < enemyDataList.Count; i++)
+        {
+            EnemyGrid.transform.GetChild(i).gameObject.GetComponent<BattleHUD>().SetHP(enemyUnits[i].currentHP);  //enemy loop here
+            //enemy2HUD.SetHP(enemy2Unit.currentHP);
+        }
+
+        dialogueText.text = "The attack is successful!";
 
 		yield return new WaitForSeconds(2f);
 
-		if (isDead || isDead2)
+
+        if (foundDead)
 		{
 			state = BattleState.WON;
 			EndBattle();
@@ -192,8 +237,10 @@ public class BattleSystem : MonoBehaviour
 		else
 		{
 			state = BattleState.ENEMYTURN;
-			StartCoroutine(nextEnemyTurn("enemy"));
-		}
+			yield return StartCoroutine(EnemyTurn(0));
+            state = BattleState.PLAYERTURN;
+            PlayerTurn();
+        }
 	}
 
 	IEnumerator PlayerHeal()
@@ -206,22 +253,36 @@ public class BattleSystem : MonoBehaviour
 		yield return new WaitForSeconds(2f);
 
 		state = BattleState.ENEMYTURN;
-		StartCoroutine(nextEnemyTurn("enemy"));
-	}
+        yield return StartCoroutine(EnemyTurn(0));
+        state = BattleState.PLAYERTURN;
+        PlayerTurn();//nextEnemyTurn("enemy"));
+    }
 
 	IEnumerator PlayerStun()
 	{
 		//check if enemy is in squares, also //stuns only one enemy
-		enemyUnit.isStunned = true;
+        int stunnedEnemyNum=0;
+        for (int i = 0; i < enemyUnits.Count; i++)
+        {
+            if (!enemyUnits[i].isStunned)
+            {
+                stunnedEnemyNum = i;
+                enemyUnits[i].isStunned = true;
+                break;
+            }
+        }
+		//enemyUnit.isStunned = true;
 
-		dialogueText.text = "You stunned " + enemyUnit.unitName;
+		dialogueText.text = "You stunned " + enemyUnits[stunnedEnemyNum].unitName;
 
 		yield return new WaitForSeconds(2f);
 		
 
 		state = BattleState.ENEMYTURN;
-		StartCoroutine(nextEnemyTurn("enemy"));
-	}
+        yield return StartCoroutine(EnemyTurn(stunnedEnemyNum));
+        state = BattleState.PLAYERTURN;
+        PlayerTurn();// nextEnemyTurn("enemy"));
+    }
 
 	public void OnAttackButton()
 	{
