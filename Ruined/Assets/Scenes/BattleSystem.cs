@@ -37,6 +37,7 @@ public class BattleSystem : MonoBehaviour
 	public BattleState state;
 
 	public GameObject rewardScreen;
+	public GameObject lostScreen;
 
 	// Start is called before the first frame update
 	void Start()
@@ -190,11 +191,17 @@ public class BattleSystem : MonoBehaviour
 		{
 			dialogueText.text = "You won the battle!";
 			rewardScreen.SetActive(true);
-
+			int curLev = PlayerPrefs.GetInt("areaLevel");
+			curLev += 1;
+			PlayerPrefs.SetInt("areaLevel", curLev);
 		}
 		else if (state == BattleState.LOST)
 		{
 			dialogueText.text = "You were defeated.";
+			PlayerPrefs.SetString("areaName", "start");
+        	PlayerPrefs.SetInt("areaLevel", 1);
+			lostScreen.SetActive(true);
+
 		}
 	}
 
