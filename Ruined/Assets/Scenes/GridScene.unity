@@ -5247,8 +5247,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unitName: Ruined Mage
   damage: 5
-  maxHP: 10
-  currentHP: 5
+  maxHP: 50
+  currentHP: 50
   isStunned: 0
   location: 0
 --- !u!1 &526963780
@@ -15336,6 +15336,7 @@ MonoBehaviour:
   playerHUD: {fileID: 304120274}
   state: 0
   rewardScreen: {fileID: 184340263}
+  lostScreen: {fileID: 0}
 --- !u!4 &1914142066
 Transform:
   m_ObjectHideFlags: 0
