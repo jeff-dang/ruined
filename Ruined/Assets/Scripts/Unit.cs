@@ -22,6 +22,11 @@ public class Unit : MonoBehaviour
 			return false;
 	}
 
+	public void setMaxHP(int newmaxHP)
+    {
+		maxHP = newmaxHP;
+    }
+
 	public void Heal(int amount)
 	{
 		currentHP += amount;

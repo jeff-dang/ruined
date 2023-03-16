@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+
 
 public enum BattleState { START, PLAYERTURN, ENEMYTURN, WON, LOST }
 
@@ -47,6 +49,7 @@ public class BattleSystem : MonoBehaviour
 	{
 		state = BattleState.START;
 		level = MapManager.CurrentLevel;
+		//playerUnit.currentHP = MapManager.currentHP;
 		StartCoroutine(SetupBattle());
 	}
 
@@ -70,8 +73,9 @@ public class BattleSystem : MonoBehaviour
 	{
 		//GameObject playerGO = Instantiate(playerPrefab, playerStart);
 		playerUnit = playerPrefab.GetComponent<Unit>();
-
-        enemyDataList = EnemyDataManager.getEnemyData(level);
+		playerUnit.setMaxHP(MapManager.maxHP);
+		playerUnit.currentHP = MapManager.currentHP;
+		enemyDataList = EnemyDataManager.getEnemyData(level);
         enemyUnits = new List<Unit>();
 
         //GameObject enemyGO = Instantiate(enemyPrefab, enemyStart);  //bilal enemy script
@@ -122,17 +126,23 @@ public class BattleSystem : MonoBehaviour
         }
         else
         {
-            dialogueText.text = enemyUnits[enemyNum].unitName + " attacks!";
+			bool isPlayerDead = false;
+			if (enemyUnit.currentHP > 0)
+            {
+				dialogueText.text = enemyUnits[enemyNum].unitName + " attacks!";
 
-            yield return new WaitForSeconds(1f);
+				yield return new WaitForSeconds(1f);
 
-            bool isDead = playerUnit.TakeDamage(enemyUnits[enemyNum].damage);
 
-            playerHUD.SetHP(playerUnit.currentHP);
+				isPlayerDead = playerUnit.TakeDamage(enemyUnits[enemyNum].damage);
 
-            yield return new WaitForSeconds(1f);
+				playerHUD.SetHP(playerUnit.currentHP);
 
-            if (isDead)
+				yield return new WaitForSeconds(1f);
+			}
+			
+
+            if (isPlayerDead)
             {
                 state = BattleState.LOST;
                 EndBattle();
@@ -194,6 +204,7 @@ public class BattleSystem : MonoBehaviour
 
 		if (state == BattleState.WON)
 		{
+			MapManager.currentHP = playerUnit.currentHP;
 			dialogueText.text = "You won the battle!";
 			rewardScreen.SetActive(true);
 			int curLev = PlayerPrefs.GetInt("areaLevel");
@@ -203,8 +214,8 @@ public class BattleSystem : MonoBehaviour
 		else if (state == BattleState.LOST)
 		{
 			dialogueText.text = "You were defeated.";
-			PlayerPrefs.SetString("areaName", "start");
-        	PlayerPrefs.SetInt("areaLevel", 1);
+			MapManager.CurrentLevel = "Start";
+			MapManager.CurrentArea = "Forest";
 			lostScreen.SetActive(true);
 
 		}
@@ -244,13 +255,18 @@ public class BattleSystem : MonoBehaviour
         //bool isDead = enemyUnit.TakeDamage(playerUnit.damage);
         //bool isDead2 = enemy2Unit.TakeDamage(playerUnit.damage);
         //List<bool> deadUnits = new List<bool>();
-        bool foundDead = false;
+        bool[] foundDead = new bool[enemyUnits.Count];
+		Array.Fill(foundDead, false);
 
         for (int i = 0; i < enemyUnits.Count; i++)
         {
+			if (enemyUnits[i].TakeDamage(0))
+            {
+				foundDead[i] = true;
+            }
 			if (IsEnemyInRange(attackRange,enemyUnits[i]))
 				if (enemyUnits[i].TakeDamage(attackDamage))
-					foundDead = true;
+					foundDead[i] = true;
         }
 
 
@@ -264,9 +280,11 @@ public class BattleSystem : MonoBehaviour
 
 		yield return new WaitForSeconds(2f);
 
-
-        if (foundDead)
+		bool notallDead = Array.Exists(foundDead, element => element == false);
+		//Debug.Log(notallDead);
+        if (!(notallDead))
 		{
+
 			state = BattleState.WON;
 			EndBattle();
 		}
@@ -309,8 +327,12 @@ public class BattleSystem : MonoBehaviour
 
 		if (foundDead)
 		{
-			state = BattleState.WON;
-			EndBattle();
+			state = BattleState.ENEMYTURN;
+			yield return StartCoroutine(EnemyTurn(0));
+			state = BattleState.PLAYERTURN;
+			PlayerTurn();
+			//state = BattleState.WON;
+			//EndBattle();
 		}
 		else
 		{
