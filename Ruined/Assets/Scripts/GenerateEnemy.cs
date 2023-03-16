@@ -39,6 +39,7 @@ public class GenerateEnemy : MonoBehaviour
             GameObject EnemyTest = new GameObject(enemyDataList[i].Name);
             SpriteRenderer sc = EnemyTest.AddComponent<SpriteRenderer>() as SpriteRenderer;
             sc.sprite = img;
+            Instantiate(EnemyTest, gameObject.transform);
             //int x, y;
 
             //int locIndex = Random.Range(1, 9);

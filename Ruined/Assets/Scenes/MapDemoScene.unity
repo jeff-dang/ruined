@@ -1307,6 +1307,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09c6359ba5826984ba66ec76355b8cbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Area: swamp
 --- !u!1 &576999370
 GameObject:
   m_ObjectHideFlags: 0
@@ -1731,6 +1732,7 @@ MonoBehaviour:
   AccesibleLevels:
   - Safe
   LevelName: 1-2
+  Area: Forest
 --- !u!1 &916946281
 GameObject:
   m_ObjectHideFlags: 0
@@ -2626,6 +2628,7 @@ MonoBehaviour:
   AccesibleLevels:
   - 1-2
   LevelName: 1-1
+  Area: Forest
 --- !u!1 &1681612106
 GameObject:
   m_ObjectHideFlags: 0

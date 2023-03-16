@@ -34,8 +34,13 @@ public class BattleSystem : MonoBehaviour
 
 	public BattleState state;
 
+	public GameObject cardPanel;
 	public GameObject rewardScreen;
 	public GameObject lostScreen;
+
+	public GameObject baseCard;
+	public Sprite struggleIcon;
+	
 
 	// Start is called before the first frame update
 	void Start()
@@ -207,7 +212,29 @@ public class BattleSystem : MonoBehaviour
 
 	void PlayerTurn()
 	{
+		if (cardPanel.transform.childCount < 1)
+		{
+
+			GameObject g;
+			g = Instantiate(baseCard, cardPanel.transform);
+			Debug.Log(g.transform.GetChild(0).gameObject.name);
+			g.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = "Struggle";
+			g.transform.GetChild(1).gameObject.GetComponent<Image>().sprite = struggleIcon;
+			g.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = "1";
+			int K = 9;
+			for (int j = 0; j < K; j++)
+			{
+				int pattern_square = j; //gives u square
+				g.transform.GetChild(pattern_square + 3).gameObject.GetComponent<Image>().color = Color.red;
+			}
+			int[] strugglepattern = new int[9] { 0, 1, 2, 3, 4, 5, 6, 7, 8 };
+			g.GetComponent<Button>().onClick.AddListener(delegate {OnStruggleButton(); });
+			//g.GetComponent<Button>().AddEventListener(1,strugglepattern, 1, this.gameObject, g);
+			Debug.Log("No more spells left!");
+		}
+
 		dialogueText.text = "Choose an action:";
+		
 	}
 
 	IEnumerator PlayerAttack(int[] attackRange,int attackDamage)
@@ -253,7 +280,7 @@ public class BattleSystem : MonoBehaviour
 	}
 
 	
-	IEnumerator PlayerLineAttack()
+	IEnumerator Struggle()
 	{
 		state = BattleState.ENEMYTURN;
 		//check if enemy is in pattern and can just make another button that hard codes attack one  //enemy loop here
@@ -264,8 +291,7 @@ public class BattleSystem : MonoBehaviour
 
 		for (int i = 0; i < enemyUnits.Count; i++)
 		{
-			if (enemyUnits[i].location == 1 || enemyUnits[i].location == 4 || enemyUnits[i].location == 7)
-				if (enemyUnits[i].TakeDamage(3))
+				if (enemyUnits[i].TakeDamage(1))
 					foundDead = true;
 		}
 
@@ -388,12 +414,12 @@ public class BattleSystem : MonoBehaviour
 
 	
 
-	public void OnLineAttackButton()
+	public void OnStruggleButton()
 	{
 		if (state != BattleState.PLAYERTURN)
 			return;
 
-		StartCoroutine(PlayerLineAttack());
+		StartCoroutine(Struggle());
 	}
 
 	public void OnHorizontalAttackButton()

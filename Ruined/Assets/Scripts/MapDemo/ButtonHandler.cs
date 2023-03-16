@@ -13,6 +13,7 @@ public class ButtonHandler : MonoBehaviour
     public string[] PreviousLevels;
     public string[] AccesibleLevels;
     public string LevelName;
+    public string Area;
 
     private Button b;
 

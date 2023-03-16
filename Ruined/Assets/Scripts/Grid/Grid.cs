@@ -88,16 +88,16 @@ public class Grid : MonoBehaviour
 
     void loadBackgroundImage(string element) {
         Image image = GameObject.Find("Background").GetComponent<Image>();
-        if(element == "forest") {
+        if(element == "Forest") {
             Sprite backgroundImage = Resources.Load<Sprite>("Forest");
             image.sprite = backgroundImage;
-        } else if (element == "mist") {
+        } else if (element == "Mist") {
             Sprite backgroundImage = Resources.Load<Sprite>("Mist");
             image.sprite = backgroundImage;
-        } else if(element == "volcano") {
+        } else if(element == "Volcano") {
             Sprite backgroundImage = Resources.Load<Sprite>("Volcano");
             image.sprite = backgroundImage;
-        } else if(element == "swamp") {
+        } else if(element == "Swamp") {
             Sprite backgroundImage = Resources.Load<Sprite>("Swamp");
             image.sprite = backgroundImage;
         }
@@ -140,7 +140,7 @@ public class Grid : MonoBehaviour
         PLAYER_GRID = new Button[] {b0, b1, b2, b3, b4, b5, b6, b7, b8};
         ENEMY_GRID = new int[] {0, 0, 0, 0, 0, 0, 0, 0, 0};
         // Set background image dynamically
-        string currentArea = PlayerPrefs.GetString("areaName");
+        string currentArea = MapManager.CurrentArea;
         Debug.Log("Current Area is: " + currentArea);
         loadBackgroundImage(currentArea);
     }
