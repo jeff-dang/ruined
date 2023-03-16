@@ -211,7 +211,7 @@ public class BattleSystem : MonoBehaviour
 		dialogueText.text = "Choose an action:";
 	}
 
-	IEnumerator PlayerAttack()
+	IEnumerator PlayerAttack(int[] attackRange,int attackDamage)
 	{
 		state = BattleState.ENEMYTURN;
         //check if enemy is in pattern and can just make another button that hard codes attack one  //enemy loop here
@@ -222,8 +222,9 @@ public class BattleSystem : MonoBehaviour
 
         for (int i = 0; i < enemyUnits.Count; i++)
         {
-            if (enemyUnits[i].TakeDamage(playerUnit.damage))
-                foundDead = true;
+			if (IsEnemyInRange(attackRange,enemyUnits[i]))
+				if (enemyUnits[i].TakeDamage(attackDamage))
+					foundDead = true;
         }
 
 
@@ -252,47 +253,7 @@ public class BattleSystem : MonoBehaviour
         }
 	}
 
-	IEnumerator PlayerWholeAttack()
-	{
-		state = BattleState.ENEMYTURN;
-		//check if enemy is in pattern and can just make another button that hard codes attack one  //enemy loop here
-		//bool isDead = enemyUnit.TakeDamage(playerUnit.damage);
-		//bool isDead2 = enemy2Unit.TakeDamage(playerUnit.damage);
-		//List<bool> deadUnits = new List<bool>();
-		bool foundDead = false;
-
-		for (int i = 0; i < enemyUnits.Count; i++)
-		{
-			if (enemyUnits[i].TakeDamage(2))
-				foundDead = true;
-		}
-
-
-		for (int i = 0; i < enemyDataList.Count; i++)
-		{
-			EnemyGrid.transform.GetChild(i).gameObject.GetComponent<BattleHUD>().SetHP(enemyUnits[i].currentHP);  //enemy loop here
-																												  //enemy2HUD.SetHP(enemy2Unit.currentHP);
-		}
-
-		dialogueText.text = "The attack is successful!";
-
-		yield return new WaitForSeconds(2f);
-
-
-		if (foundDead)
-		{
-			state = BattleState.WON;
-			EndBattle();
-		}
-		else
-		{
-			state = BattleState.ENEMYTURN;
-			yield return StartCoroutine(EnemyTurn(0));
-			state = BattleState.PLAYERTURN;
-			PlayerTurn();
-		}
-	}
-
+	
 	IEnumerator PlayerLineAttack()
 	{
 		state = BattleState.ENEMYTURN;
@@ -418,13 +379,15 @@ public class BattleSystem : MonoBehaviour
         PlayerTurn();// nextEnemyTurn("enemy"));
     }
 
-	public void OnWholeAttackButton()
+	public void OnAttackButton(int[] attackRange,int damage)
 	{
 		if (state != BattleState.PLAYERTURN)
 			return;
 
-		StartCoroutine(PlayerWholeAttack());
+		StartCoroutine(PlayerAttack(attackRange,damage));
 	}
+
+	
 
 	public void OnLineAttackButton()
 	{
@@ -457,4 +420,19 @@ public class BattleSystem : MonoBehaviour
 
 		StartCoroutine(PlayerStun());
 	}
+
+	private bool IsEnemyInRange(int[] attackRange,Unit enemy)
+    {
+		foreach (int location in attackRange)
+		{
+			if (enemy.location == location)
+            {
+				return true;
+            }
+		
+				
+           
+		}
+		return false;
+    }
 }

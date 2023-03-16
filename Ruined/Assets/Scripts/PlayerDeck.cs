@@ -15,5 +15,35 @@ public class PlayerDeck : MonoBehaviour
         public Sprite Icon;
     }
 
-    [SerializeField] Card[] cardDeck;
+    public static PlayerDeck Instance;
+
+    [SerializeField] public Card[] cardDeck;
+
+    public Card[] getCardDeck()
+    {
+        return cardDeck;
+    }
+
+    public void addCard(Card newCard)
+    {
+        Array.Resize<Card>(ref cardDeck, cardDeck.Length + 1);
+        cardDeck[cardDeck.Length-1] = newCard;
+    }
+
+    public void removeCard(Card newCard)
+    {
+        Array.Resize<Card>(ref cardDeck, cardDeck.Length + 1);
+        cardDeck[cardDeck.Length] = newCard;
+    }
+
+    private void Awake()
+    {
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+    }
 }

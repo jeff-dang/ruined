@@ -6,7 +6,7 @@
 		"Type": "Earth",
 		"location": 0,
 		"Damage": 3,
-		"HP": 29
+		"HP": 1
 	},
 	{
 		"LevelIdentifier":"1-1",
@@ -14,7 +14,7 @@
 		"Type": "Fire",
 		"location": 3,
 		"Damage": 1,
-		"HP": 30
+		"HP": 1
 	},
 	{
 		"LevelIdentifier":"1-1",
@@ -22,7 +22,7 @@
 		"Type": "Water",
 		"location": 4,
 		"Damage": 4,
-		"HP": 32
+		"HP": 1
 	},
 	{
 		"LevelIdentifier":"1-2",
