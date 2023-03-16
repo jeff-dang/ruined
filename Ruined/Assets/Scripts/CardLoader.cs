@@ -41,7 +41,7 @@ public class CardLoader : MonoBehaviour
 
     void Start()
     {
-        cardDeck = playerDeck.GetComponent<PlayerDeck>().cardDeck;
+        cardDeck = PlayerDeck.Instance.cardDeck;
         GameObject buttonTemplate = transform.GetChild(0).gameObject;
         GameObject g;
 

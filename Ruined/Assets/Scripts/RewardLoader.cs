@@ -19,7 +19,11 @@ public static class RewardButtonExtension
         });
         button.onClick.AddListener(delegate () {
             button.interactable = false;
-            RewardLoader.CheckMapMove();
+            RewardLoader.numSpellsSelected += 1;
+            if (RewardLoader.numSpellsSelected > 1)
+            {
+                SceneManager.LoadScene("MapScene");
+            }
         });
         
     }
@@ -40,12 +44,12 @@ public class RewardLoader : MonoBehaviour
     public Card[] rewardPool;
     public Card[] rewardDeck;
     public GameObject BattleSystemObj;
-    public static int numSpellsSelected = 0;
+    public static int numSpellsSelected;
 
 
     void Start()
     {
-        
+        numSpellsSelected = 0;
         int[] rewardPoolChoice = generateRewards(rewardPool.Length);
         Card[] rewardDeck = new Card[rewardPoolChoice.Length];
         for (int i = 0; i < rewardPoolChoice.Length; i++)
@@ -101,7 +105,7 @@ public class RewardLoader : MonoBehaviour
         return rewardPoolint;
     }
 
-    public static void CheckMapMove()
+    public void CheckMapMove()
     {
         numSpellsSelected += 1;
         if (numSpellsSelected > 1)
