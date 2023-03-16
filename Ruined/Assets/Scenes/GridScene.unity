@@ -13574,6 +13574,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1528d7cd99af1774785d9b17d4d67a80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CurrentLevel: 
   cardDeck:
   - Name: Middle Shot
     Pattern: 010000000400000007000000

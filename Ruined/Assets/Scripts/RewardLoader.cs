@@ -22,7 +22,7 @@ public static class RewardButtonExtension
             RewardLoader.numSpellsSelected += 1;
             if (RewardLoader.numSpellsSelected > 1)
             {
-                SceneManager.LoadScene("MapScene");
+                SceneManager.LoadScene("MapDemoScene");
             }
         });
         

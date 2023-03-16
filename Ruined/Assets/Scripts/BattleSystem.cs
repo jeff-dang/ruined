@@ -43,6 +43,7 @@ public class BattleSystem : MonoBehaviour
 	void Start()
 	{
 		state = BattleState.START;
+		level = MapManager.CurrentLevel;
 		StartCoroutine(SetupBattle());
 	}
 

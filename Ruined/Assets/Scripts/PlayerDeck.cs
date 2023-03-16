@@ -16,6 +16,7 @@ public class PlayerDeck : MonoBehaviour
     }
 
     public static PlayerDeck Instance;
+    public string CurrentLevel;
 
     [SerializeField] public Card[] cardDeck;
 
