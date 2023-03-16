@@ -14,10 +14,12 @@ public static class ButtonExtension
     {
         button.onClick.AddListener(delegate () {
             //OnClick(param);
+            if (BattleSystemObj.GetComponent<BattleSystem>().state == BattleState.PLAYERTURN)
+                UnityEngine.Object.Destroy(card);
             BattleSystemObj.GetComponent<BattleSystem>().OnAttackButton(attackRange,damage);
         });
         button.onClick.AddListener(delegate () {
-            UnityEngine.Object.Destroy(card);
+            
         });
     }
 }
