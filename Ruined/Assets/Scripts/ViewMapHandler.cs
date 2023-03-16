@@ -13,7 +13,7 @@ public class ViewMapHandler : MonoBehaviour
     {
         PlayerPrefs.SetString("areaName", "start");
         PlayerPrefs.SetInt("areaLevel", 1);
-        SceneManager.LoadScene("MapScene");
+        SceneManager.LoadScene("MapDemoScene");
 
         //MapScreen.GetComponent<CanvasGroup>().alpha = 1f;
     

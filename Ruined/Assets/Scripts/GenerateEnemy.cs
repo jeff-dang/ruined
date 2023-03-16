@@ -20,6 +20,7 @@ public class GenerateEnemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        levelName = MapManager.CurrentLevel;
         HashSet<int> useLoc = new HashSet<int>();
         Dictionary<int, Button> buttonMapping = new Dictionary<int, Button>();
         List<EnemyData> enemyDataList = EnemyDataManager.getEnemyData(levelName);

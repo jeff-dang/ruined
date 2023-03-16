@@ -11,12 +11,10 @@ public class BattleSystem : MonoBehaviour
     public string level;
 
 	public GameObject playerPrefab;
-	public GameObject enemyPrefab;  //enemy loop here
-	public GameObject enemy2Prefab;
+	
 
 	public Transform playerStart;
-	public Transform enemyStart;   //enemy loop here
-	public Transform enemy2Start;
+	
 
     //public GameObject Grid;
     public GameObject EnemyGrid;

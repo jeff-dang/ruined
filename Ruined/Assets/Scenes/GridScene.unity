@@ -3710,6 +3710,7 @@ GameObject:
   - component: {fileID: 431873479}
   - component: {fileID: 431873478}
   - component: {fileID: 431873477}
+  - component: {fileID: 431873480}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -3814,6 +3815,29 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &431873480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 431873475}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b04860ea9ee7e7488901d3e9a4d6169, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  img: {fileID: 21300000, guid: c784356b3f7c0354d95fafe41686b13d, type: 3}
+  levelName: 1-1
+  b0: {fileID: 1903444094}
+  b1: {fileID: 194496681}
+  b2: {fileID: 340592309}
+  b3: {fileID: 752458612}
+  b4: {fileID: 213871400}
+  b5: {fileID: 1219282062}
+  b6: {fileID: 532154724}
+  b7: {fileID: 571160946}
+  b8: {fileID: 1074418244}
 --- !u!1 &437867984
 GameObject:
   m_ObjectHideFlags: 0
@@ -8709,7 +8733,6 @@ GameObject:
   m_Component:
   - component: {fileID: 985536939}
   - component: {fileID: 985536938}
-  - component: {fileID: 985536940}
   m_Layer: 0
   m_Name: Grid
   m_TagString: Untagged
@@ -8745,29 +8768,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &985536940
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 985536937}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b04860ea9ee7e7488901d3e9a4d6169, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  img: {fileID: 21300000, guid: c784356b3f7c0354d95fafe41686b13d, type: 3}
-  levelName: 1-1
-  b0: {fileID: 1903444094}
-  b1: {fileID: 194496681}
-  b2: {fileID: 340592309}
-  b3: {fileID: 752458612}
-  b4: {fileID: 213871400}
-  b5: {fileID: 1219282062}
-  b6: {fileID: 532154724}
-  b7: {fileID: 571160946}
-  b8: {fileID: 1074418244}
 --- !u!1 &994597327
 GameObject:
   m_ObjectHideFlags: 0
@@ -14528,11 +14528,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   level: 1-1
   playerPrefab: {fileID: 522037489}
-  enemyPrefab: {fileID: 782068539}
-  enemy2Prefab: {fileID: 1474483753}
   playerStart: {fileID: 1293939523}
-  enemyStart: {fileID: 213871399}
-  enemy2Start: {fileID: 213871399}
   EnemyGrid: {fileID: 1471033454}
   dialogueText: {fileID: 438615751}
   playerHUD: {fileID: 304120274}
