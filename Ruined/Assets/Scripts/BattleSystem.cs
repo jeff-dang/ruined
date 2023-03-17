@@ -40,6 +40,7 @@ public class BattleSystem : MonoBehaviour
 	public GameObject cardPanel;
 	public GameObject rewardScreen;
 	public GameObject victoryScreen;
+	public GameObject lostScreen;
 
 	public GameObject baseCard;
 	public Sprite struggleIcon;
@@ -190,7 +191,7 @@ public class BattleSystem : MonoBehaviour
 		}
 		else if (state == BattleState.LOST)
 		{
-			
+			lostScreen.SetActive(true);
 			dialogueText.text = "You were defeated.";
 			MapManager.CurrentLevel = "Start";
 			MapManager.CurrentArea = "Forest";
