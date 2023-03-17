@@ -5,8 +5,8 @@
 		"Name": "Smart 1",
 		"Type": "Earth",
 		"location": 0,
-		"Damage": 3,
-		"HP": 1
+		"Damage": 1,
+		"HP": 3
 	},
 	{
 		"LevelIdentifier":"1-1",
@@ -14,31 +14,135 @@
 		"Type": "Fire",
 		"location": 3,
 		"Damage": 1,
-		"HP": 1
+		"HP": 3
 	},
 	{
 		"LevelIdentifier":"1-1",
 		"Name": "Smart 3",
 		"Type": "Water",
 		"location": 4,
-		"Damage": 4,
-		"HP": 1
+		"Damage": 1,
+		"HP": 3
 	},
 	{
 		"LevelIdentifier":"1-2",
-		"Name": "dumb 1",
+		"Name": "Dumb 1",
 		"Type": "Earth",
-		"location": 5,
-		"Damage": 4,
-		"HP": 12
+		"location": 4,
+		"Damage": 2,
+		"HP": 2
 	},
 	{
 		"LevelIdentifier":"1-2",
-		"Name": "dumb 2",
+		"Name": "Dumb 2",
 		"Type": "Fire",
-		"location": 0,
-		"Damage": 5,
-		"HP": 9
+		"location": 8,
+		"Damage": 2,
+		"HP": 2
+	},
+	{
+		"LevelIdentifier":"2-1",
+		"Name": "Mist 1",
+		"Type": "Fire",
+		"location": 4,
+		"Damage": 2,
+		"HP": 7
+	},
+	{
+		"LevelIdentifier":"2-1",
+		"Name": "Mist 2",
+		"Type": "Fire",
+		"location": 1,
+		"Damage": 2,
+		"HP": 7
+	},
+	{
+		"LevelIdentifier":"2-2",
+		"Name": "Mist 1",
+		"Type": "Fire",
+		"location": 4,
+		"Damage": 2,
+		"HP": 7
+	},
+	{
+		"LevelIdentifier":"2-2",
+		"Name": "Mist 1",
+		"Type": "Fire",
+		"location": 7,
+		"Damage": 2,
+		"HP": 7
+	},
+	{
+		"LevelIdentifier":"3-1",
+		"Name": "Swamp 1",
+		"Type": "Fire",
+		"location": 3,
+		"Damage": 1,
+		"HP": 5
+	},
+	{
+		"LevelIdentifier":"3-1",
+		"Name": "Swamp 2",
+		"Type": "Fire",
+		"location": 4,
+		"Damage": 1,
+		"HP": 5
+	},
+	{
+		"LevelIdentifier":"3-1",
+		"Name": "Swamp 3",
+		"Type": "Fire",
+		"location": 5,
+		"Damage": 1,
+		"HP": 5
+	},
+	{
+		"LevelIdentifier":"3-1",
+		"Name": "Swamp 4",
+		"Type": "Fire",
+		"location": 7,
+		"Damage": 1,
+		"HP": 5
+	},
+	{
+		"LevelIdentifier":"3-2",
+		"Name": "Swamp 1",
+		"Type": "Fire",
+		"location": 3,
+		"Damage": 1,
+		"HP": 5
+	},
+	{
+		"LevelIdentifier":"3-2",
+		"Name": "Swamp 2",
+		"Type": "Fire",
+		"location": 4,
+		"Damage": 1,
+		"HP": 5
+	},
+	{
+		"LevelIdentifier":"3-2",
+		"Name": "Swamp 3",
+		"Type": "Fire",
+		"location": 5,
+		"Damage": 1,
+		"HP": 5
+	},
+	{
+		"LevelIdentifier":"3-2",
+		"Name": "Swamp 4",
+		"Type": "Fire",
+		"location": 1,
+		"Damage": 1,
+		"HP": 5
+	},
+	{
+		"LevelIdentifier":"Boss",
+		"Name": "Big Bad",
+		"Type": "Fire",
+		"location": 4,
+		"Damage": 3,
+		"HP": 30
 	}
 	]
 }

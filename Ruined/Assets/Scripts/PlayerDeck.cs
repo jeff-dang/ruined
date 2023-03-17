@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using System.Linq;
 
 public class PlayerDeck : MonoBehaviour
 {
@@ -31,10 +32,15 @@ public class PlayerDeck : MonoBehaviour
         cardDeck[cardDeck.Length-1] = newCard;
     }
 
-    public void removeCard(Card newCard)
+    public void removeCard(string CardName)
     {
-        Array.Resize<Card>(ref cardDeck, cardDeck.Length + 1);
-        cardDeck[cardDeck.Length] = newCard;
+        var indexToRemove = Array.FindIndex(cardDeck, Card => Card.Name == CardName);
+        cardDeck = cardDeck.Where((source, index) => index != indexToRemove).ToArray();
+    }
+
+    public void destroyDeck()
+    {
+        Destroy(this.gameObject);
     }
 
     private void Awake()

@@ -10,12 +10,15 @@ using static BattleSystem;
 
 public static class ButtonExtension
 {
-    public static void AddEventListener<T>(this Button button, T param,int[] attackRange, int damage,GameObject BattleSystemObj, GameObject card)
+    public static void AddEventListener<T>(this Button button, T param,int[] attackRange, int damage,GameObject BattleSystemObj, GameObject card, string cardName)
     {
         button.onClick.AddListener(delegate () {
             //OnClick(param);
             if (BattleSystemObj.GetComponent<BattleSystem>().state == BattleState.PLAYERTURN)
+            {
                 UnityEngine.Object.Destroy(card);
+                PlayerDeck.Instance.removeCard(cardName);
+            }
             BattleSystemObj.GetComponent<BattleSystem>().OnAttackButton(attackRange,damage);
         });
         button.onClick.AddListener(delegate () {
@@ -68,7 +71,7 @@ public class CardLoader : MonoBehaviour
             /*g.GetComponent <Button> ().onClick.AddListener (delegate() {
        ItemClicked (i);
    });*/
-            g.GetComponent<Button>().AddEventListener(i,cardDeck[i].Pattern, cardDeck[i].Damage, BattleSystemObj, g);
+            g.GetComponent<Button>().AddEventListener(i,cardDeck[i].Pattern, cardDeck[i].Damage, BattleSystemObj, g, cardDeck[i].Name);
         }
 
         Destroy(buttonTemplate);

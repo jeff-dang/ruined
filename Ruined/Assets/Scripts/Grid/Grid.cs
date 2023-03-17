@@ -92,7 +92,7 @@ public class Grid : MonoBehaviour
             Sprite backgroundImage = Resources.Load<Sprite>("Forest");
             image.sprite = backgroundImage;
         } else if (element == "Mist") {
-            Sprite backgroundImage = Resources.Load<Sprite>("Mist");
+            Sprite backgroundImage = Resources.Load<Sprite>("Toxic Mist");
             image.sprite = backgroundImage;
         } else if(element == "Volcano") {
             Sprite backgroundImage = Resources.Load<Sprite>("Volcano");

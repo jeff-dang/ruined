@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 
@@ -38,7 +39,7 @@ public class BattleSystem : MonoBehaviour
 
 	public GameObject cardPanel;
 	public GameObject rewardScreen;
-	public GameObject lostScreen;
+	public GameObject victoryScreen;
 
 	public GameObject baseCard;
 	public Sprite struggleIcon;
@@ -156,42 +157,7 @@ public class BattleSystem : MonoBehaviour
         }
     }
 
-	//IEnumerator Enemy2Turn()  //remove this after enemy turn loop
-	//{
-	//	if (enemyUnit.isStunned == true)
-	//	{
-	//		dialogueText.text = enemy2Unit.unitName + " is stunned!";
-	//		yield return new WaitForSeconds(1f);
-	//		enemyUnit.isStunned = false;
-	//		state = BattleState.PLAYERTURN; //make this next turn function
-	//		PlayerTurn();
-	//	}
-	//	else
-	//	{
-	//		dialogueText.text = enemy2Unit.unitName + " attacks!";
-
-	//		yield return new WaitForSeconds(1f);
-
-	//		bool isDead = playerUnit.TakeDamage(enemy2Unit.damage);
-
-	//		playerHUD.SetHP(playerUnit.currentHP);
-
-	//		yield return new WaitForSeconds(1f);
-
-	//		if (isDead)
-	//		{
-	//			state = BattleState.LOST;
-	//			EndBattle();
-	//		}
-	//		else
-	//		{
-	//			state = BattleState.PLAYERTURN;
-	//			PlayerTurn();
-	//		}
-	//	}
-
-
-	//}
+	
 
 	void EndBattle()
 	{
@@ -206,6 +172,17 @@ public class BattleSystem : MonoBehaviour
 		{
 			MapManager.currentHP = playerUnit.currentHP;
 			dialogueText.text = "You won the battle!";
+			if (enemyUnits[0].unitName == "Big Bad")
+            {
+				victoryScreen.SetActive(true);
+				MapManager.CurrentLevel = "Start";
+				MapManager.CurrentArea = "Forest";
+				MapManager.maxHP = 10;
+				MapManager.currentHP = 10;
+				PlayerDeck.Instance.destroyDeck();
+				dialogueText.text = "You beat the demo!";
+				StartCoroutine(LoadToStartScreen());
+			}
 			rewardScreen.SetActive(true);
 			int curLev = PlayerPrefs.GetInt("areaLevel");
 			curLev += 1;
@@ -213,10 +190,15 @@ public class BattleSystem : MonoBehaviour
 		}
 		else if (state == BattleState.LOST)
 		{
+			
 			dialogueText.text = "You were defeated.";
 			MapManager.CurrentLevel = "Start";
 			MapManager.CurrentArea = "Forest";
-			lostScreen.SetActive(true);
+			MapManager.maxHP = 10;
+			MapManager.currentHP = 10;
+			PlayerDeck.Instance.destroyDeck();
+			StartCoroutine(LoadToStartScreen());
+
 
 		}
 	}
@@ -425,6 +407,13 @@ public class BattleSystem : MonoBehaviour
         state = BattleState.PLAYERTURN;
         PlayerTurn();// nextEnemyTurn("enemy"));
     }
+
+	IEnumerator LoadToStartScreen()
+    {
+		dialogueText.text = "You were defeated.";
+		yield return new WaitForSeconds(2);
+		SceneManager.LoadScene("UserInterfaceScene");
+	}
 
 	public void OnAttackButton(int[] attackRange,int damage)
 	{

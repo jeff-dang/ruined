@@ -25,7 +25,16 @@ public class ButtonHandler : MonoBehaviour
             changeColorToYellow(b);
             b.onClick.AddListener(delegate () {
                 MapManager.CurrentLevel = LevelName;
-                SceneManager.LoadScene("GridScene");
+                MapManager.CurrentArea = Area;
+                if (MapManager.CurrentLevel == "Safe1" || MapManager.CurrentLevel == "Safe2" || MapManager.CurrentLevel == "Safe3")
+                {
+                    SceneManager.LoadScene("SafeScene");
+                }
+                else
+                {
+                    SceneManager.LoadScene("GridScene");
+                }
+                
             });
         }
         
