@@ -22,13 +22,62 @@ public class Grid : MonoBehaviour
 
     GameObject player;
     CanvasGroup staticMap;
+    Rigidbody2D playerRigidBody;
+    Animator PlayerAnimator;
 
+    bool moving = false;
+    Transform destination;
     int playerLocation = 4;
+    string DirectionString;
 
     public void movePlayer(int tileIndex) {
-        Transform transform = PLAYER_GRID[tileIndex].transform;
+        destination = PLAYER_GRID[tileIndex].transform;
+
+        if (playerLocation == tileIndex+2)
+        {
+            DirectionString = "TR";
+        }
+        else if (playerLocation == tileIndex + 4)
+        {
+            player.transform.Rotate(new Vector3(0, -180));
+            DirectionString = "TL";
+        }
+        else if (playerLocation + 4 == tileIndex)
+        {
+            DirectionString = "BR";
+        }
+        else if (playerLocation + 2 == tileIndex)
+        {
+            player.transform.Rotate(new Vector3(0, -180));
+            DirectionString = "BL";
+        }
+        else if (playerLocation + 1 == tileIndex)
+        {
+            DirectionString = "R";
+        }
+        else if (playerLocation - 1 == tileIndex)
+        {
+            player.transform.Rotate(new Vector3(0, -180));
+            DirectionString = "L";
+        }
+        else if (playerLocation - 3 == tileIndex)
+        {
+            DirectionString = "T";
+        }
+        else
+        {
+            DirectionString = "B";
+        }
+
+        Vector3 Direction = new Vector3();
+        Direction = destination.position - player.transform.position;
+        Direction = Direction.normalized;
+        playerRigidBody.velocity = new Vector2(Direction.x, Direction.y);
+        moving = true;
+        PlayerAnimator.SetBool("moving", true);
+        //Debug.Log(Direction);
         // Debug.Log("Player's position BEFORE moving: " + player.transform.position);
-        player.transform.position = transform.position;
+        //player.transform.position = transform.position;
         // Debug.Log("Player's position AFTER moving: " + player.transform.position);
         playerLocation = tileIndex;
     }
@@ -123,6 +172,56 @@ public class Grid : MonoBehaviour
         SceneManager.LoadScene("MapScene");
     }
 
+    bool checkDestinationReached(Vector3 playerLoc, Vector3 destLoc)
+    {
+        if (DirectionString.Equals("R"))
+        {
+            //Debug.Log(1);
+            return playerLoc.x >= destLoc.x;
+        }
+        else if (DirectionString.Equals("L"))
+        {
+            if (playerLoc.x <= destLoc.x)
+                player.transform.Rotate(new Vector3(0, -180));
+            //Debug.Log(2);
+            return playerLoc.x <= destLoc.x;
+        }
+        else if (DirectionString.Equals("T"))
+        {
+            //Debug.Log(3);
+            return playerLoc.y >= destLoc.y;
+        }
+        else if (DirectionString.Equals("B"))
+        {
+            //Debug.Log(4);
+            return playerLoc.y <= destLoc.y;
+        }
+        else if (DirectionString.Equals("TR"))
+        {
+            //Debug.Log(5);
+            return playerLoc.x >= destLoc.x || playerLoc.y >= destLoc.y;
+        }
+        else if (DirectionString.Equals("TL"))
+        {
+            if (playerLoc.x <= destLoc.x || playerLoc.y >= destLoc.y)
+                player.transform.Rotate(new Vector3(0, -180));
+            //Debug.Log(6);
+            return playerLoc.x <= destLoc.x || playerLoc.y >= destLoc.y;
+        }
+        else if (DirectionString.Equals("BR"))
+        {
+            //Debug.Log(7);
+            return playerLoc.x >= destLoc.x || playerLoc.y <= destLoc.y;
+        }
+        else
+        {
+            if (playerLoc.x <= destLoc.x || playerLoc.y <= destLoc.y)
+                player.transform.Rotate(new Vector3(0, -180));
+            //Debug.Log(8);
+            return playerLoc.x <= destLoc.x || playerLoc.y <= destLoc.y;
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -137,6 +236,8 @@ public class Grid : MonoBehaviour
         b8 = GameObject.Find("PlayerGrid/Button (8)").GetComponent<Button>();
         player = GameObject.Find("Player");
         staticMap = GameObject.Find("MenuPeak").GetComponent<CanvasGroup>();
+        playerRigidBody = player.GetComponent<Rigidbody2D>();
+        PlayerAnimator = player.GetComponent<Animator>();
         PLAYER_GRID = new Button[] {b0, b1, b2, b3, b4, b5, b6, b7, b8};
         ENEMY_GRID = new int[] {0, 0, 0, 0, 0, 0, 0, 0, 0};
         // Set background image dynamically
@@ -148,6 +249,15 @@ public class Grid : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (moving)
+        {
+            if (checkDestinationReached(player.transform.position, destination.position))
+            {
+                //Debug.Log("STOOOOOP");
+                moving = false;
+                PlayerAnimator.SetBool("moving", false);
+                playerRigidBody.velocity = new Vector2(0, 0);
+            }
+        }
     }
 }

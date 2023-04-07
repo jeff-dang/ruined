@@ -44,6 +44,7 @@ public class BattleSystem : MonoBehaviour
 
 	public GameObject baseCard;
 	public Sprite struggleIcon;
+    Animator playerAnimator;
 	
 
 	// Start is called before the first frame update
@@ -51,6 +52,7 @@ public class BattleSystem : MonoBehaviour
 	{
 		state = BattleState.START;
 		level = MapManager.CurrentLevel;
+        playerAnimator = playerPrefab.GetComponent<Animator>();
 		//playerUnit.currentHP = MapManager.currentHP;
 		StartCoroutine(SetupBattle());
 	}
@@ -135,17 +137,21 @@ public class BattleSystem : MonoBehaviour
 
 				yield return new WaitForSeconds(1f);
 
-
-				isPlayerDead = playerUnit.TakeDamage(enemyUnits[enemyNum].damage);
+                playerAnimator.SetBool("Hit", true);
+                isPlayerDead = playerUnit.TakeDamage(enemyUnits[enemyNum].damage);
 
 				playerHUD.SetHP(playerUnit.currentHP);
 
 				yield return new WaitForSeconds(1f);
-			}
+                playerAnimator.SetBool("Hit", false);
+            }
 			
 
             if (isPlayerDead)
             {
+                playerPrefab.transform.localScale = new Vector3(1.5f, 1.7f, 1.0f);
+                playerAnimator.SetBool("Dead", true);
+                yield return new WaitForSeconds(2f);
                 state = BattleState.LOST;
                 EndBattle();
             }
@@ -241,6 +247,9 @@ public class BattleSystem : MonoBehaviour
         bool[] foundDead = new bool[enemyUnits.Count];
 		Array.Fill(foundDead, false);
 
+        playerPrefab.transform.localScale = new Vector3(1.5f, 2.25f, 1f);
+        playerAnimator.SetBool("Attacking_2", true);
+
         for (int i = 0; i < enemyUnits.Count; i++)
         {
 			if (enemyUnits[i].TakeDamage(0))
@@ -263,7 +272,10 @@ public class BattleSystem : MonoBehaviour
 
 		yield return new WaitForSeconds(2f);
 
-		bool notallDead = Array.Exists(foundDead, element => element == false);
+        playerAnimator.SetBool("Attacking_2", false);
+        playerPrefab.transform.localScale = new Vector3(1f, 1.5f, 1f);
+
+        bool notallDead = Array.Exists(foundDead, element => element == false);
 		//Debug.Log(notallDead);
         if (!(notallDead))
 		{
@@ -289,6 +301,8 @@ public class BattleSystem : MonoBehaviour
 		//bool isDead2 = enemy2Unit.TakeDamage(playerUnit.damage);
 		//List<bool> deadUnits = new List<bool>();
 		bool foundDead = false;
+        playerPrefab.transform.localScale = new Vector3(1.5f, 2.25f, 1f);
+        playerAnimator.SetBool("Attacking_2", true);
 
 		for (int i = 0; i < enemyUnits.Count; i++)
 		{
@@ -303,12 +317,16 @@ public class BattleSystem : MonoBehaviour
 																												  //enemy2HUD.SetHP(enemy2Unit.currentHP);
 		}
 
-		dialogueText.text = "The attack is successful!";
+
+        
+        dialogueText.text = "The attack is successful!";
 
 		yield return new WaitForSeconds(2f);
+        playerAnimator.SetBool("Attacking_2", false);
+        playerPrefab.transform.localScale = new Vector3(1f, 1.5f, 1f);
 
 
-		if (foundDead)
+        if (foundDead)
 		{
 			state = BattleState.ENEMYTURN;
 			yield return StartCoroutine(EnemyTurn(0));
