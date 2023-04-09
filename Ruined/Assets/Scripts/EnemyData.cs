@@ -8,5 +8,7 @@ public class EnemyData
     public int location;
     public int Damage;
     public int HP;
-    public int[] AttackPatterns;
+    public int AttackPattern1;
+    public int AttackPattern2;
+    public int AttackPattern3;
 }

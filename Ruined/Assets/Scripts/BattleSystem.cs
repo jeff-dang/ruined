@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -45,11 +46,14 @@ public class BattleSystem : MonoBehaviour
 	public GameObject baseCard;
 	public Sprite struggleIcon;
     Animator playerAnimator;
+
+	public static BattleSystem Instance;
 	
 
 	// Start is called before the first frame update
 	void Start()
 	{
+		Instance = this;
 		state = BattleState.START;
 		level = MapManager.CurrentLevel;
         playerAnimator = playerPrefab.GetComponent<Animator>();
@@ -79,6 +83,7 @@ public class BattleSystem : MonoBehaviour
 		playerUnit = playerPrefab.GetComponent<Unit>();
 		playerUnit.setMaxHP(MapManager.maxHP);
 		playerUnit.currentHP = MapManager.currentHP;
+		playerUnit.location = 4;
 		enemyDataList = EnemyDataManager.getEnemyData(level);
         enemyUnits = new List<Unit>();
 
@@ -97,7 +102,7 @@ public class BattleSystem : MonoBehaviour
             enemy.unitName = enemyDataList[i].Name;
 			enemy.location = enemyDataList[i].location;
 			enemy.damage = enemyDataList[i].Damage;
-			enemy.attackPatterns = enemyDataList[i].AttackPatterns; 
+			enemy.attackPattern1 = new int[3] { enemyDataList[i].AttackPattern1, enemyDataList[i].AttackPattern2, enemyDataList[i].AttackPattern3 };
 			enemyUnits.Add(enemy);
             EnemyGrid.transform.GetChild(i).gameObject.SetActive(true);
             EnemyGrid.transform.GetChild(i).gameObject.GetComponent<BattleHUD>().SetHUD(enemy);
@@ -106,8 +111,6 @@ public class BattleSystem : MonoBehaviour
 		dialogueText.text = "A wild " + enemyUnits[0].unitName + " approaches...";
 
 		playerHUD.SetHUD(playerUnit);   
-		//enemyHUD.SetHUD(enemyUnit);    //enemy loop here
-		//enemy2HUD.SetHUD(enemy2Unit);
 
 		yield return new WaitForSeconds(2f);
 
@@ -132,7 +135,7 @@ public class BattleSystem : MonoBehaviour
         else
         {
 			bool isPlayerDead = false;
-			if (enemyUnit.currentHP > 0)
+			if (enemyUnit.currentHP > 0 & enemyUnits[enemyNum].attackPattern1.Contains(playerUnit.location))
             {
 				dialogueText.text = enemyUnits[enemyNum].unitName + " attacks!";
 
@@ -233,7 +236,10 @@ public class BattleSystem : MonoBehaviour
 			//g.GetComponent<Button>().AddEventListener(1,strugglepattern, 1, this.gameObject, g);
 			Debug.Log("No more spells left!");
 		}
-
+		Debug.Log("Attack Pattern is...");
+		Debug.Log(enemyUnits[0].attackPattern1[1]);
+		Grid.Instance.highlightSingleEnemyAttackPositions(enemyUnits[0].attackPattern1);
+		Grid.Instance.highlightSingleEnemyAttackPositions(enemyUnits[1].attackPattern1);
 		dialogueText.text = "Choose an action:";
 		
 	}
@@ -443,7 +449,11 @@ public class BattleSystem : MonoBehaviour
 		StartCoroutine(PlayerAttack(attackRange,damage));
 	}
 
-	
+	public void OnMoveButton(int position)
+	{
+		playerUnit.location = position;
+	}
+
 
 	public void OnStruggleButton()
 	{

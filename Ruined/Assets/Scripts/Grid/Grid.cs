@@ -17,7 +17,7 @@ public class Grid : MonoBehaviour
     Button b7;
     Button b8;
 
-    Button[] PLAYER_GRID;
+    public static Button[] PLAYER_GRID;
     int[] ENEMY_GRID; // x,y coordinates with all the possible locations
 
     GameObject player;
@@ -30,7 +30,10 @@ public class Grid : MonoBehaviour
     int playerLocation = 4;
     string DirectionString;
 
+    public static Grid Instance;
+
     public void movePlayer(int tileIndex) {
+        BattleSystem.Instance.OnMoveButton(tileIndex);
         destination = PLAYER_GRID[tileIndex].transform;
 
         if (playerLocation == tileIndex+2)
@@ -244,6 +247,7 @@ public class Grid : MonoBehaviour
         string currentArea = MapManager.CurrentArea;
         Debug.Log("Current Area is: " + currentArea);
         loadBackgroundImage(currentArea);
+        Instance = this;
     }
 
     // Update is called once per frame

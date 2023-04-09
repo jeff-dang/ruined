@@ -11,8 +11,8 @@ public class Unit : MonoBehaviour
 	public int currentHP;
 	public bool isStunned;
 	public int location;
-	public int[] attackPatterns;
-
+	public int[] attackPattern1;
+	//hello
 	public bool TakeDamage(int dmg)
 	{
 		currentHP -= dmg;

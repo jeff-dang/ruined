@@ -7,7 +7,9 @@
 		"location": 0,
 		"Damage": 1,
 		"HP": 3,
-		"attackPatterns":[[0,1,2],[1,2,3]]
+		"AttackPattern1":0,
+		"AttackPattern2":1, 
+		"AttackPattern3":2  
 	},
 	{
 		"LevelIdentifier":"1-1",
@@ -16,7 +18,9 @@
 		"location": 3,
 		"Damage": 1,
 		"HP": 3,
-		"attackPatterns":[[0,1,2],[1,2,3]]
+		"AttackPattern1":0,
+		"AttackPattern2":1, 
+		"AttackPattern3":2  
 	},
 	{
 		"LevelIdentifier":"1-1",
@@ -34,7 +38,9 @@
 		"location": 4,
 		"Damage": 2,
 		"HP": 2,
-		"attackPatterns":[[0,1,2],[1,2,3]]
+		"AttackPattern1":0,
+		"AttackPattern2":1, 
+		"AttackPattern3":2  
 	},
 	{
 		"LevelIdentifier":"1-2",
@@ -43,7 +49,9 @@
 		"location": 8,
 		"Damage": 2,
 		"HP": 2,
-		"attackPatterns":[[0,1,2],[1,2,3]]
+		"AttackPattern1":4,
+		"AttackPattern2":5, 
+		"AttackPattern3":6  
 	},
 	{
 		"LevelIdentifier":"2-1",
