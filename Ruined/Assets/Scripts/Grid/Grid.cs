@@ -33,56 +33,62 @@ public class Grid : MonoBehaviour
     public static Grid Instance;
 
     public void movePlayer(int tileIndex) {
-        BattleSystem.Instance.OnMoveButton(tileIndex);
-        destination = PLAYER_GRID[tileIndex].transform;
+        if (BattleSystem.Instance.hasMoved == false)
+        {
+            BattleSystem.Instance.OnMoveButton(tileIndex);
+            destination = PLAYER_GRID[tileIndex].transform;
+            if (playerLocation == tileIndex + 2)
+            {
+                DirectionString = "TR";
+            }
+            else if (playerLocation == tileIndex + 4)
+            {
+                player.transform.Rotate(new Vector3(0, -180));
+                DirectionString = "TL";
+            }
+            else if (playerLocation + 4 == tileIndex)
+            {
+                DirectionString = "BR";
+            }
+            else if (playerLocation + 2 == tileIndex)
+            {
+                player.transform.Rotate(new Vector3(0, -180));
+                DirectionString = "BL";
+            }
+            else if (playerLocation + 1 == tileIndex)
+            {
+                DirectionString = "R";
+            }
+            else if (playerLocation - 1 == tileIndex)
+            {
+                player.transform.Rotate(new Vector3(0, -180));
+                DirectionString = "L";
+            }
+            else if (playerLocation - 3 == tileIndex)
+            {
+                DirectionString = "T";
+            }
+            else
+            {
+                DirectionString = "B";
+            }
 
-        if (playerLocation == tileIndex+2)
-        {
-            DirectionString = "TR";
-        }
-        else if (playerLocation == tileIndex + 4)
-        {
-            player.transform.Rotate(new Vector3(0, -180));
-            DirectionString = "TL";
-        }
-        else if (playerLocation + 4 == tileIndex)
-        {
-            DirectionString = "BR";
-        }
-        else if (playerLocation + 2 == tileIndex)
-        {
-            player.transform.Rotate(new Vector3(0, -180));
-            DirectionString = "BL";
-        }
-        else if (playerLocation + 1 == tileIndex)
-        {
-            DirectionString = "R";
-        }
-        else if (playerLocation - 1 == tileIndex)
-        {
-            player.transform.Rotate(new Vector3(0, -180));
-            DirectionString = "L";
-        }
-        else if (playerLocation - 3 == tileIndex)
-        {
-            DirectionString = "T";
+            Vector3 Direction = new Vector3();
+            Direction = destination.position - player.transform.position;
+            Direction = Direction.normalized;
+            playerRigidBody.velocity = new Vector2(Direction.x, Direction.y);
+            moving = true;
+            PlayerAnimator.SetBool("moving", true);
+            //Debug.Log(Direction);
+            // Debug.Log("Player's position BEFORE moving: " + player.transform.position);
+            //player.transform.position = transform.position;
+            // Debug.Log("Player's position AFTER moving: " + player.transform.position);
+            playerLocation = tileIndex;
         }
         else
         {
-            DirectionString = "B";
+            BattleSystem.Instance.dialogueText.text = "You may only move once per turn...";
         }
-
-        Vector3 Direction = new Vector3();
-        Direction = destination.position - player.transform.position;
-        Direction = Direction.normalized;
-        playerRigidBody.velocity = new Vector2(Direction.x, Direction.y);
-        moving = true;
-        PlayerAnimator.SetBool("moving", true);
-        //Debug.Log(Direction);
-        // Debug.Log("Player's position BEFORE moving: " + player.transform.position);
-        //player.transform.position = transform.position;
-        // Debug.Log("Player's position AFTER moving: " + player.transform.position);
-        playerLocation = tileIndex;
     }
 
     // Shows where can enemy attack on the player's grid

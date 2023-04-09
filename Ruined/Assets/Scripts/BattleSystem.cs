@@ -33,6 +33,7 @@ public class BattleSystem : MonoBehaviour
     public TextMeshProUGUI dialogueText;
 
 	public BattleHUD playerHUD;
+	public bool hasMoved;
 	//public BattleHUD enemyHUD; //enemy loop here
 	//public BattleHUD enemy2HUD;
 
@@ -84,6 +85,7 @@ public class BattleSystem : MonoBehaviour
 		playerUnit.setMaxHP(MapManager.maxHP);
 		playerUnit.currentHP = MapManager.currentHP;
 		playerUnit.location = 4;
+		hasMoved = false;
 		enemyDataList = EnemyDataManager.getEnemyData(level);
         enemyUnits = new List<Unit>();
 
@@ -149,6 +151,11 @@ public class BattleSystem : MonoBehaviour
 				yield return new WaitForSeconds(1f);
                 playerAnimator.SetBool("Hit", false);
             }
+			else if(enemyUnit.currentHP > 0) 
+            {
+				dialogueText.text = enemyUnits[enemyNum].unitName + " misses!";
+				yield return new WaitForSeconds(1f);
+			}
 			
 
             if (isPlayerDead)
@@ -216,6 +223,7 @@ public class BattleSystem : MonoBehaviour
 
 	void PlayerTurn()
 	{
+		hasMoved = false;
 		if (cardPanel.transform.childCount < 1)
 		{
 
@@ -238,8 +246,11 @@ public class BattleSystem : MonoBehaviour
 		}
 		Debug.Log("Attack Pattern is...");
 		Debug.Log(enemyUnits[0].attackPattern1[1]);
-		Grid.Instance.highlightSingleEnemyAttackPositions(enemyUnits[0].attackPattern1);
-		Grid.Instance.highlightSingleEnemyAttackPositions(enemyUnits[1].attackPattern1);
+		for (int i = 0; i < enemyDataList.Count; i++)
+        {
+			if (enemyUnits[i].currentHP > 0)
+			Grid.Instance.highlightSingleEnemyAttackPositions(enemyUnits[i].attackPattern1);
+		}
 		dialogueText.text = "Choose an action:";
 		
 	}
@@ -247,6 +258,7 @@ public class BattleSystem : MonoBehaviour
 	IEnumerator PlayerAttack(int[] attackRange,int attackDamage)
 	{
 		state = BattleState.ENEMYTURN;
+		Grid.Instance.defaultGridColor();
         //check if enemy is in pattern and can just make another button that hard codes attack one  //enemy loop here
         //bool isDead = enemyUnit.TakeDamage(playerUnit.damage);
         //bool isDead2 = enemy2Unit.TakeDamage(playerUnit.damage);
@@ -450,8 +462,9 @@ public class BattleSystem : MonoBehaviour
 	}
 
 	public void OnMoveButton(int position)
-	{
+	{	
 		playerUnit.location = position;
+		hasMoved = true;
 	}
 
 
