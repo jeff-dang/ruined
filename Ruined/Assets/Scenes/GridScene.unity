@@ -3329,7 +3329,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b04860ea9ee7e7488901d3e9a4d6169, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  img: {fileID: 21300000, guid: c784356b3f7c0354d95fafe41686b13d, type: 3}
+  BatSprite: {fileID: 998234327, guid: e0bab2c3afea05f4583eeacfeedcff27, type: 3}
+  BatController: {fileID: 9100000, guid: 5b727211c092f3447a1b08efcdfeffbc, type: 2}
+  GoblinSprite: {fileID: 400908756, guid: fdb056b4820f92c4e846136ae81cccf6, type: 3}
+  GoblinController: {fileID: 9100000, guid: aa3ada17f6701dc45ac60ed38b4904c8, type: 2}
+  SkeletonSprite: {fileID: 2123045117, guid: 57ff2c6f40e67504cacb67ab75ba4315, type: 3}
+  SkeletonController: {fileID: 9100000, guid: c3b45c3b80890934c8272c34a4666ccd, type: 2}
+  BossSprite: {fileID: -57626054, guid: 31b000b10b7d6c24dbec32bbbd6bb95e, type: 3}
+  BossController: {fileID: 9100000, guid: e0723a59dec753c40937fc75de1aca8a, type: 2}
   levelName: 1-1
   b0: {fileID: 1903444094}
   b1: {fileID: 194496681}
@@ -4424,6 +4431,7 @@ MonoBehaviour:
   currentHP: 50
   isStunned: 0
   location: 0
+  attackPattern1: 
 --- !u!95 &522037494
 Animator:
   serializedVersion: 5
@@ -4516,6 +4524,7 @@ MonoBehaviour:
   currentHP: 10
   isStunned: 0
   location: 0
+  attackPattern1: 
 --- !u!212 &526963783
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -6978,6 +6987,7 @@ GameObject:
   - component: {fileID: 782068540}
   - component: {fileID: 782068542}
   - component: {fileID: 782068541}
+  - component: {fileID: 782068543}
   m_Layer: 5
   m_Name: Enemy
   m_TagString: Player
@@ -6994,7 +7004,7 @@ Transform:
   m_GameObject: {fileID: 782068539}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 300.9999, y: 184, z: -1079.9999}
-  m_LocalScale: {x: 53.836334, y: 49.940205, z: 0}
+  m_LocalScale: {x: 400, y: 400, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 431873476}
@@ -7018,6 +7028,7 @@ MonoBehaviour:
   currentHP: 5
   isStunned: 0
   location: 0
+  attackPattern1: 
 --- !u!212 &782068542
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -7060,7 +7071,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 0.990566, g: 0.990566, b: 0.990566, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -7070,6 +7081,26 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &782068543
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 782068539}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e0723a59dec753c40937fc75de1aca8a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!1 &825490647
 GameObject:
   m_ObjectHideFlags: 0
@@ -11436,6 +11467,7 @@ MonoBehaviour:
   currentHP: 3
   isStunned: 0
   location: 0
+  attackPattern1: 
 --- !u!212 &1474483756
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -13667,6 +13699,7 @@ MonoBehaviour:
   EnemyGrid: {fileID: 1471033454}
   dialogueText: {fileID: 438615751}
   playerHUD: {fileID: 304120274}
+  hasMoved: 0
   state: 0
   cardPanel: {fileID: 1994878001}
   rewardScreen: {fileID: 184340263}

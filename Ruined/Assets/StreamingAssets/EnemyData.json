@@ -2,7 +2,7 @@
 	"data" : [
 	{
 		"LevelIdentifier":"1-1",
-		"Name": "Smart 1",
+		"Name": "Bat 1",
 		"Type": "Earth",
 		"location": 0,
 		"Damage": 1,
@@ -13,7 +13,7 @@
 	},
 	{
 		"LevelIdentifier":"1-1",
-		"Name": "Smart 2",
+		"Name": "Bat 2",
 		"Type": "Fire",
 		"location": 3,
 		"Damage": 1,
@@ -24,7 +24,7 @@
 	},
 	{
 		"LevelIdentifier":"1-1",
-		"Name": "Smart 3",
+		"Name": "Bat 3",
 		"Type": "Water",
 		"location": 4,
 		"Damage": 1,
@@ -33,7 +33,7 @@
 	},
 	{
 		"LevelIdentifier":"1-2",
-		"Name": "Dumb 1",
+		"Name": "Bat 1",
 		"Type": "Earth",
 		"location": 4,
 		"Damage": 2,
@@ -44,7 +44,7 @@
 	},
 	{
 		"LevelIdentifier":"1-2",
-		"Name": "Dumb 2",
+		"Name": "Bat 2",
 		"Type": "Fire",
 		"location": 8,
 		"Damage": 2,
@@ -55,7 +55,7 @@
 	},
 	{
 		"LevelIdentifier":"2-1",
-		"Name": "Mist 1",
+		"Name": "Goblin 1",
 		"Type": "Fire",
 		"location": 4,
 		"Damage": 2,
@@ -64,7 +64,7 @@
 	},
 	{
 		"LevelIdentifier":"2-1",
-		"Name": "Mist 2",
+		"Name": "Bat 2",
 		"Type": "Fire",
 		"location": 1,
 		"Damage": 2,
@@ -73,7 +73,7 @@
 	},
 	{
 		"LevelIdentifier":"2-2",
-		"Name": "Mist 1",
+		"Name": "Goblin 1",
 		"Type": "Fire",
 		"location": 4,
 		"Damage": 2,
@@ -82,7 +82,7 @@
 	},
 	{
 		"LevelIdentifier":"2-2",
-		"Name": "Mist 1",
+		"Name": "Bat 1",
 		"Type": "Fire",
 		"location": 7,
 		"Damage": 2,
@@ -91,7 +91,7 @@
 	},
 	{
 		"LevelIdentifier":"3-1",
-		"Name": "Swamp 1",
+		"Name": "Skeleton 1",
 		"Type": "Fire",
 		"location": 3,
 		"Damage": 1,
@@ -100,7 +100,7 @@
 	},
 	{
 		"LevelIdentifier":"3-1",
-		"Name": "Swamp 2",
+		"Name": "Skeleton 2",
 		"Type": "Fire",
 		"location": 4,
 		"Damage": 1,
@@ -109,7 +109,7 @@
 	},
 	{
 		"LevelIdentifier":"3-1",
-		"Name": "Swamp 3",
+		"Name": "Goblin 3",
 		"Type": "Fire",
 		"location": 5,
 		"Damage": 1,
@@ -118,7 +118,7 @@
 	},
 	{
 		"LevelIdentifier":"3-1",
-		"Name": "Swamp 4",
+		"Name": "Bat 4",
 		"Type": "Fire",
 		"location": 7,
 		"Damage": 1,
@@ -127,7 +127,7 @@
 	},
 	{
 		"LevelIdentifier":"3-2",
-		"Name": "Swamp 1",
+		"Name": "Skeleton 1",
 		"Type": "Fire",
 		"location": 3,
 		"Damage": 1,
@@ -136,7 +136,7 @@
 	},
 	{
 		"LevelIdentifier":"3-2",
-		"Name": "Swamp 2",
+		"Name": "Bat 2",
 		"Type": "Fire",
 		"location": 4,
 		"Damage": 1,
@@ -145,7 +145,7 @@
 	},
 	{
 		"LevelIdentifier":"3-2",
-		"Name": "Swamp 3",
+		"Name": "Goblin 3",
 		"Type": "Fire",
 		"location": 5,
 		"Damage": 1,
@@ -154,7 +154,7 @@
 	},
 	{
 		"LevelIdentifier":"3-2",
-		"Name": "Swamp 4",
+		"Name": "Skeleton 4",
 		"Type": "Fire",
 		"location": 1,
 		"Damage": 1,
