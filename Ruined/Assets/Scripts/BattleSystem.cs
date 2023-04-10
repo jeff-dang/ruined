@@ -128,6 +128,8 @@ public class BattleSystem : MonoBehaviour
 	IEnumerator EnemyTurn(int enemyNum)    //enemy loop here + enemyturn2
 	{
         Unit enemyUnit = enemyUnits[enemyNum];
+        GameObject enemyPrefab = GameObject.Find(enemyUnit.unitName);
+        Animator enemyAnimator = enemyPrefab.GetComponent<Animator>();
         if (enemyUnit.isStunned == true)
         {
             dialogueText.text = enemyUnits[enemyNum].unitName + " is stunned!";
@@ -145,7 +147,12 @@ public class BattleSystem : MonoBehaviour
             {
 				dialogueText.text = enemyUnits[enemyNum].unitName + " attacks!";
 
-				yield return new WaitForSeconds(1f);
+                
+                enemyAnimator.SetBool("Attacking", true);
+                yield return new WaitForSeconds(1.5f);
+                enemyAnimator.SetBool("Attacking", false);
+
+                //yield return new WaitForSeconds(1f);
 
                 playerAnimator.SetBool("Hit", true);
                 isPlayerDead = playerUnit.TakeDamage(enemyUnits[enemyNum].damage);
@@ -157,7 +164,10 @@ public class BattleSystem : MonoBehaviour
             }
 			else if(enemyUnit.currentHP > 0) 
             {
-				dialogueText.text = enemyUnits[enemyNum].unitName + " misses!";
+                enemyAnimator.SetBool("Attacking", true);
+                yield return new WaitForSeconds(1.5f);
+                enemyAnimator.SetBool("Attacking", false);
+                dialogueText.text = enemyUnits[enemyNum].unitName + " misses!";
 				yield return new WaitForSeconds(1f);
 			}
 			
@@ -280,8 +290,22 @@ public class BattleSystem : MonoBehaviour
 				foundDead[i] = true;
             }
 			if (IsEnemyInRange(attackRange,enemyUnits[i]))
-				if (enemyUnits[i].TakeDamage(attackDamage))
-					foundDead[i] = true;
+            {
+                //Debug.Log(enemyUnits[i].name);
+                GameObject enemyPrefab = GameObject.Find(enemyUnits[i].unitName);
+                Animator enemyAnimator = enemyPrefab.GetComponent<Animator>();
+                enemyAnimator.SetBool("Hit", true);
+                yield return new WaitForSeconds(1.5f);
+                enemyAnimator.SetBool("Hit", false);
+
+                if (enemyUnits[i].TakeDamage(attackDamage))
+                {
+                    foundDead[i] = true;
+                    enemyAnimator.SetBool("Dead", true);
+                    yield return new WaitForSeconds(2f);
+                }
+            }
+				
         }
 
 
