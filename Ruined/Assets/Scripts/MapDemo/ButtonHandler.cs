@@ -22,12 +22,13 @@ public class ButtonHandler : MonoBehaviour
         Debug.Log(MapManager.CurrentLevel);
         b = this.gameObject.GetComponent<Button>();
         if (PreviousLevels.Contains(MapManager.CurrentLevel)) {
-            changeColorToYellow(b);
+            changeIconToDestination(b);
             b.onClick.AddListener(delegate () {
                 MapManager.CurrentLevel = LevelName;
                 MapManager.CurrentArea = Area;
                 if (MapManager.CurrentLevel == "Safe1" || MapManager.CurrentLevel == "Safe2" || MapManager.CurrentLevel == "Safe3")
                 {
+                    
                     SceneManager.LoadScene("SafeScene");
                 }
                 else
@@ -51,6 +52,8 @@ public class ButtonHandler : MonoBehaviour
         ColorBlock color = button.GetComponent<Button>().colors;
         color.normalColor = Color.yellow;
         button.colors = color;
+
+
         // // Set the color back to its original color after wait time
         // float x = 1f;
         // float r = 255f;
@@ -60,4 +63,11 @@ public class ButtonHandler : MonoBehaviour
         // color.normalColor = new Color(r, g, b, 1);
         // button.colors = color;
     }
+
+    void changeIconToDestination(Button button)
+{
+    Sprite icon = Resources.Load<Sprite>("destination_icon");
+    button.image.sprite = icon;
+}
+
 }
