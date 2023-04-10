@@ -106,8 +106,12 @@ public class BattleSystem : MonoBehaviour
 			enemy.damage = enemyDataList[i].Damage;
 			enemy.attackPattern1 = new int[3] { enemyDataList[i].AttackPattern1, enemyDataList[i].AttackPattern2, enemyDataList[i].AttackPattern3 };
 			enemyUnits.Add(enemy);
+			GameObject enemyObj = GameObject.Find(enemy.unitName);
+
             EnemyGrid.transform.GetChild(i).gameObject.SetActive(true);
-            EnemyGrid.transform.GetChild(i).gameObject.GetComponent<BattleHUD>().SetHUD(enemy);
+			EnemyGrid.transform.GetChild(i).gameObject.transform.position = enemyObj.transform.position;
+			EnemyGrid.transform.GetChild(i).gameObject.transform.position = EnemyGrid.transform.GetChild(i).gameObject.transform.position + new Vector3(0, 0.7f, 0);
+			EnemyGrid.transform.GetChild(i).gameObject.GetComponent<BattleHUD>().SetHUD(enemy);
         }
 
 		dialogueText.text = "A wild " + enemyUnits[0].unitName + " approaches...";
