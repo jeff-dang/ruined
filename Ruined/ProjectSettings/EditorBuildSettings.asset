@@ -23,4 +23,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SafeScene.unity
     guid: 54968d0763ba731429145c7f9efaba8c
+  - enabled: 1
+    path: Assets/Scenes/LoreScene.unity
+    guid: 012be81a4c95baf478c3be8a5d7b99f4
   m_configObjects: {}

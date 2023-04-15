@@ -13,7 +13,9 @@ public class ViewMapHandler : MonoBehaviour
     public void onViewMapButtonClick()
     {
         menuClickSource.Play();
-        StartCoroutine(waitForSound(menuClickSource));
+        StartCoroutine(waitForSoundMap(menuClickSource));
+
+        //Auidio has finished playing
 
         //MapScreen.GetComponent<CanvasGroup>().alpha = 1f;
 
@@ -28,7 +30,14 @@ public class ViewMapHandler : MonoBehaviour
         }*/
     }
 
-    IEnumerator waitForSound(AudioSource menuClickSource)
+    public void onViewLoreButtonClick()
+    {
+        menuClickSource.Play();
+        StartCoroutine(waitForSoundLore(menuClickSource));
+
+    }
+
+    IEnumerator waitForSoundMap(AudioSource menuClickSource)
     {
         //Wait Until Sound has finished playing
         while (menuClickSource.isPlaying)
@@ -36,10 +45,20 @@ public class ViewMapHandler : MonoBehaviour
             yield return null;
         }
 
-        //Auidio has finished playing
         PlayerPrefs.SetString("areaName", "start");
         PlayerPrefs.SetInt("areaLevel", 1);
         SceneManager.LoadScene("MapDemoScene");
+    }
+
+    IEnumerator waitForSoundLore(AudioSource menuClickSource)
+    {
+        //Wait Until Sound has finished playing
+        while (menuClickSource.isPlaying)
+        {
+            yield return null;
+        }
+
+        SceneManager.LoadScene("LoreScene");
     }
 
 
