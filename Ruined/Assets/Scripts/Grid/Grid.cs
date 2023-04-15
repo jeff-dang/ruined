@@ -20,10 +20,12 @@ public class Grid : MonoBehaviour
     public static Button[] PLAYER_GRID;
     int[] ENEMY_GRID; // x,y coordinates with all the possible locations
 
+    //public AudioClip RunningClip;
     GameObject player;
     CanvasGroup staticMap;
     Rigidbody2D playerRigidBody;
     Animator PlayerAnimator;
+    AudioSource audioSource;
 
     bool moving = false;
     Transform destination;
@@ -79,6 +81,7 @@ public class Grid : MonoBehaviour
             playerRigidBody.velocity = new Vector2(Direction.x, Direction.y);
             moving = true;
             PlayerAnimator.SetBool("moving", true);
+            audioSource.Play();
             //Debug.Log(Direction);
             // Debug.Log("Player's position BEFORE moving: " + player.transform.position);
             //player.transform.position = transform.position;
@@ -247,6 +250,7 @@ public class Grid : MonoBehaviour
         staticMap = GameObject.Find("MenuPeak").GetComponent<CanvasGroup>();
         playerRigidBody = player.GetComponent<Rigidbody2D>();
         PlayerAnimator = player.GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
         PLAYER_GRID = new Button[] {b0, b1, b2, b3, b4, b5, b6, b7, b8};
         ENEMY_GRID = new int[] {0, 0, 0, 0, 0, 0, 0, 0, 0};
         // Set background image dynamically
@@ -266,6 +270,7 @@ public class Grid : MonoBehaviour
                 //Debug.Log("STOOOOOP");
                 moving = false;
                 PlayerAnimator.SetBool("moving", false);
+                audioSource.Stop();
                 playerRigidBody.velocity = new Vector2(0, 0);
             }
         }

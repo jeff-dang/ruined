@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,13 +7,13 @@ public class GenerateEnemy : MonoBehaviour
 {
 
     public Sprite BatSprite;
-    public AnimatorController BatController;
+    public RuntimeAnimatorController BatController;
     public Sprite GoblinSprite;
-    public AnimatorController GoblinController;
+    public RuntimeAnimatorController GoblinController;
     public Sprite SkeletonSprite;
-    public AnimatorController SkeletonController;
+    public RuntimeAnimatorController SkeletonController;
     public Sprite BossSprite;
-    public AnimatorController BossController;
+    public RuntimeAnimatorController BossController;
     public string levelName;
     public Button b0;
     public Button b1;

@@ -14,31 +14,45 @@ public class ButtonHandler : MonoBehaviour
     public string[] AccesibleLevels;
     public string LevelName;
     public string Area;
+    private AudioSource menuClickSource;
 
     private Button b;
 
     void Start()
     {
+        menuClickSource = GetComponent<AudioSource>();
         Debug.Log(MapManager.CurrentLevel);
         b = this.gameObject.GetComponent<Button>();
         if (PreviousLevels.Contains(MapManager.CurrentLevel)) {
             changeIconToDestination(b);
             b.onClick.AddListener(delegate () {
-                MapManager.CurrentLevel = LevelName;
-                MapManager.CurrentArea = Area;
-                if (MapManager.CurrentLevel == "Safe1" || MapManager.CurrentLevel == "Safe2" || MapManager.CurrentLevel == "Safe3")
-                {
-                    
-                    SceneManager.LoadScene("SafeScene");
-                }
-                else
-                {
-                    SceneManager.LoadScene("GridScene");
-                }
-                
+                menuClickSource.Play();
+                StartCoroutine(waitForSound(menuClickSource));               
             });
         }
         
+    }
+
+    IEnumerator waitForSound(AudioSource menuClickSource)
+    {
+        //Wait Until Sound has finished playing
+        while (menuClickSource.isPlaying)
+        {
+            yield return null;
+        }
+
+        //Auidio has finished playing
+        MapManager.CurrentLevel = LevelName;
+        MapManager.CurrentArea = Area;
+        if (MapManager.CurrentLevel == "Safe1" || MapManager.CurrentLevel == "Safe2" || MapManager.CurrentLevel == "Safe3")
+        {
+
+            SceneManager.LoadScene("SafeScene");
+        }
+        else
+        {
+            SceneManager.LoadScene("GridScene");
+        }
     }
 
     // Update is called once per frame

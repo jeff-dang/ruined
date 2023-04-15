@@ -46,7 +46,19 @@ public class BattleSystem : MonoBehaviour
 
 	public GameObject baseCard;
 	public Sprite struggleIcon;
+
+    public AudioClip NormalAttackClip;
+    public AudioClip StrongAttackClip;
+    public AudioClip HitClip;
+    public AudioClip GoblinAttackClip;
+    public AudioClip BatAttackClip;
+    public AudioClip SkeletonAttackClip;
+    public AudioClip BossAttackClip;
+    public AudioClip MonsterDeathClip;
+    public AudioClip VictoryClip;
+    public AudioClip LosingClip;
     Animator playerAnimator;
+    AudioSource audioSource;
 
 	public static BattleSystem Instance;
 	
@@ -58,6 +70,7 @@ public class BattleSystem : MonoBehaviour
 		state = BattleState.START;
 		level = MapManager.CurrentLevel;
         playerAnimator = playerPrefab.GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
 		//playerUnit.currentHP = MapManager.currentHP;
 		StartCoroutine(SetupBattle());
 	}
@@ -149,12 +162,29 @@ public class BattleSystem : MonoBehaviour
 
                 
                 enemyAnimator.SetBool("Attacking", true);
+                if (enemyUnit.unitName.Contains("Goblin"))
+                {
+                    audioSource.PlayOneShot(GoblinAttackClip);
+                }
+                else if (enemyUnit.unitName.Contains("Bat"))
+                {
+                    audioSource.PlayOneShot(BatAttackClip);
+                }else if (enemyUnit.unitName.Contains("Skeleton"))
+                {
+                    audioSource.PlayOneShot(SkeletonAttackClip);
+                }else
+                {
+                    audioSource.PlayOneShot(BossAttackClip);
+                }
+                StartCoroutine(modifyVolume(audioSource, 1f, 0.5f));
                 yield return new WaitForSeconds(1.5f);
                 enemyAnimator.SetBool("Attacking", false);
 
                 //yield return new WaitForSeconds(1f);
 
                 playerAnimator.SetBool("Hit", true);
+                audioSource.PlayOneShot(HitClip);
+                StartCoroutine(modifyVolume(audioSource, 1f, 0.5f));
                 isPlayerDead = playerUnit.TakeDamage(enemyUnits[enemyNum].damage);
 
 				playerHUD.SetHP(playerUnit.currentHP);
@@ -165,6 +195,23 @@ public class BattleSystem : MonoBehaviour
 			else if(enemyUnit.currentHP > 0) 
             {
                 enemyAnimator.SetBool("Attacking", true);
+                if (enemyUnit.unitName.Contains("Goblin"))
+                {
+                    audioSource.PlayOneShot(GoblinAttackClip);
+                }
+                else if (enemyUnit.unitName.Contains("Bat"))
+                {
+                    audioSource.PlayOneShot(BatAttackClip);
+                }
+                else if (enemyUnit.unitName.Contains("Skeleton"))
+                {
+                    audioSource.PlayOneShot(SkeletonAttackClip);
+                }
+                else
+                {
+                    audioSource.PlayOneShot(BossAttackClip);
+                }
+                StartCoroutine(modifyVolume(audioSource, 1f, 0.5f));
                 yield return new WaitForSeconds(1.5f);
                 enemyAnimator.SetBool("Attacking", false);
                 dialogueText.text = enemyUnits[enemyNum].unitName + " misses!";
@@ -202,7 +249,9 @@ public class BattleSystem : MonoBehaviour
 
 		if (state == BattleState.WON)
 		{
-			MapManager.currentHP = playerUnit.currentHP;
+            audioSource.PlayOneShot(VictoryClip);
+            StartCoroutine(modifyVolume(audioSource, 0.25f, 0.5f));
+            MapManager.currentHP = playerUnit.currentHP;
 			dialogueText.text = "You won the battle!";
 			if (enemyUnits[0].unitName == "Big Bad")
             {
@@ -222,7 +271,9 @@ public class BattleSystem : MonoBehaviour
 		}
 		else if (state == BattleState.LOST)
 		{
-			lostScreen.SetActive(true);
+            audioSource.PlayOneShot(LosingClip);
+            StartCoroutine(modifyVolume(audioSource, 0.25f, 0.5f));
+            lostScreen.SetActive(true);
 			dialogueText.text = "You were defeated.";
 			MapManager.CurrentLevel = "Start";
 			MapManager.CurrentArea = "Forest";
@@ -282,6 +333,14 @@ public class BattleSystem : MonoBehaviour
 
         playerPrefab.transform.localScale = new Vector3(1.5f, 2.25f, 1f);
         playerAnimator.SetBool("Attacking_2", true);
+        if (attackDamage == 100)
+        {
+            audioSource.PlayOneShot(StrongAttackClip);
+        }else
+        {
+            audioSource.PlayOneShot(NormalAttackClip);
+        }
+        StartCoroutine(modifyVolume(audioSource, 0.15f, 0.5f));
 
         for (int i = 0; i < enemyUnits.Count; i++)
         {
@@ -295,6 +354,8 @@ public class BattleSystem : MonoBehaviour
                 GameObject enemyPrefab = GameObject.Find(enemyUnits[i].unitName);
                 Animator enemyAnimator = enemyPrefab.GetComponent<Animator>();
                 enemyAnimator.SetBool("Hit", true);
+                audioSource.PlayOneShot(HitClip);
+                StartCoroutine(modifyVolume(audioSource, 1f, 0.5f));
                 yield return new WaitForSeconds(1.5f);
                 enemyAnimator.SetBool("Hit", false);
 
@@ -302,6 +363,8 @@ public class BattleSystem : MonoBehaviour
                 {
                     foundDead[i] = true;
                     enemyAnimator.SetBool("Dead", true);
+                    audioSource.PlayOneShot(MonsterDeathClip);
+                    StartCoroutine(modifyVolume(audioSource, 1f, 0.5f));
                     yield return new WaitForSeconds(2f);
                 }
             }
@@ -350,8 +413,9 @@ public class BattleSystem : MonoBehaviour
 		bool foundDead = false;
         playerPrefab.transform.localScale = new Vector3(1.5f, 2.25f, 1f);
         playerAnimator.SetBool("Attacking_2", true);
+        audioSource.PlayOneShot(NormalAttackClip);
 
-		for (int i = 0; i < enemyUnits.Count; i++)
+        for (int i = 0; i < enemyUnits.Count; i++)
 		{
 				if (enemyUnits[i].TakeDamage(1))
 					foundDead = true;
@@ -541,5 +605,18 @@ public class BattleSystem : MonoBehaviour
            
 		}
 		return false;
+    }
+
+    IEnumerator modifyVolume(AudioSource menuClickSource, float start, float end)
+    {
+        menuClickSource.volume = start;
+        //Wait Until Sound has finished playing
+        while (menuClickSource.isPlaying)
+        {
+            yield return null;
+        }
+
+        //Auidio has finished playing
+        menuClickSource.volume = end;
     }
 }
