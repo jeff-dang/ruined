@@ -136,6 +136,7 @@ GameObject:
   - component: {fileID: 241688780}
   - component: {fileID: 241688779}
   - component: {fileID: 241688783}
+  - component: {fileID: 241688784}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -239,6 +240,102 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdbbb0aaad85db746879a89ec31a5f24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!82 &241688784
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 241688778}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 278d0423978b1d147977d9eaddd275f9, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &333396346
 GameObject:
   m_ObjectHideFlags: 0
@@ -421,7 +518,6 @@ GameObject:
   - component: {fileID: 878080895}
   - component: {fileID: 878080894}
   - component: {fileID: 878080893}
-  - component: {fileID: 878080892}
   m_Layer: 0
   m_Name: ViewMapButton (2)
   m_TagString: Untagged
@@ -450,18 +546,6 @@ RectTransform:
   m_AnchoredPosition: {x: -264.2, y: 693.94}
   m_SizeDelta: {x: 139.58, y: 124.13}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &878080892
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 878080890}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fdbbb0aaad85db746879a89ec31a5f24, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &878080893
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -771,7 +855,6 @@ GameObject:
   - component: {fileID: 1281838528}
   - component: {fileID: 1281838527}
   - component: {fileID: 1281838526}
-  - component: {fileID: 1281838525}
   m_Layer: 0
   m_Name: ViewMapButton
   m_TagString: Untagged
@@ -800,18 +883,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 300, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1281838525
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1281838523}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fdbbb0aaad85db746879a89ec31a5f24, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1281838526
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -918,9 +989,8 @@ GameObject:
   - component: {fileID: 1338865663}
   - component: {fileID: 1338865662}
   - component: {fileID: 1338865661}
-  - component: {fileID: 1338865660}
   m_Layer: 0
-  m_Name: ViewMapButton (1)
+  m_Name: LoreButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -947,18 +1017,6 @@ RectTransform:
   m_AnchoredPosition: {x: 574, y: -111}
   m_SizeDelta: {x: 300, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1338865660
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1338865658}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fdbbb0aaad85db746879a89ec31a5f24, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1338865661
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1005,7 +1063,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 241688783}
         m_TargetAssemblyTypeName: ViewMapHandler, Assembly-CSharp
-        m_MethodName: onViewMapButtonClick
+        m_MethodName: onViewLoreButtonClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1248,7 +1306,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 9.06, y: -6.47}
+  m_AnchoredPosition: {x: 9.060001, y: -6.4699974}
   m_SizeDelta: {x: 18.11, y: 12.94}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1740334581
@@ -1497,7 +1555,6 @@ GameObject:
   - component: {fileID: 1949267901}
   - component: {fileID: 1949267900}
   - component: {fileID: 1949267899}
-  - component: {fileID: 1949267898}
   m_Layer: 0
   m_Name: ViewMapButton
   m_TagString: Untagged
@@ -1526,18 +1583,6 @@ RectTransform:
   m_AnchoredPosition: {x: 575, y: 69}
   m_SizeDelta: {x: 300, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1949267898
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1949267896}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fdbbb0aaad85db746879a89ec31a5f24, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1949267899
 MonoBehaviour:
   m_ObjectHideFlags: 0
