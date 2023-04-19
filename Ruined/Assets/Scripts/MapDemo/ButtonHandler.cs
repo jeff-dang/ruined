@@ -30,6 +30,11 @@ public class ButtonHandler : MonoBehaviour
                 StartCoroutine(waitForSound(menuClickSource));               
             });
         }
+
+        if (MapManager.CheckIfCompleted(LevelName))
+        {
+            changeIconToCompleted(b);
+        }
         
     }
 
@@ -79,9 +84,14 @@ public class ButtonHandler : MonoBehaviour
     }
 
     void changeIconToDestination(Button button)
-{
-    Sprite icon = Resources.Load<Sprite>("destination_icon");
-    button.image.sprite = icon;
-}
+    {
+        Sprite icon = Resources.Load<Sprite>("destination_icon");
+        button.image.sprite = icon;
+    }
 
+    void changeIconToCompleted(Button button)
+    {
+        Sprite icon = Resources.Load<Sprite>("completed_icon");
+        button.image.sprite = icon;
+    }
 }

@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/UserInterfaceScene.unity
     guid: 90405ce99555d9d47acaec3aa06c899a
   - enabled: 1
-    path: Assets/Scenes/MapScene.unity
+    path: Assets/Scenes/OldMapScene.unity
     guid: ee6d460295cd5b2489f7e381076fcefe
   - enabled: 1
     path: Assets/Scenes/GridScene.unity

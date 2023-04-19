@@ -252,6 +252,7 @@ public class BattleSystem : MonoBehaviour
             audioSource.PlayOneShot(VictoryClip);
             StartCoroutine(modifyVolume(audioSource, 0.25f, 0.5f));
             MapManager.currentHP = playerUnit.currentHP;
+			MapManager.CompletedLevels.Add(MapManager.CurrentLevel);
 			dialogueText.text = "You won the battle!";
 			if (enemyUnits[0].unitName == "Big Bad")
             {
