@@ -435,8 +435,8 @@ MonoBehaviour:
     The battles are fierce and intense, but Magnus is determined to regain his powers
     and to defeat Zarek.
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: eec07dc7015c8eb40ac26717aef0ed9f, type: 2}
+  m_sharedMaterial: {fileID: -1189409196480081274, guid: eec07dc7015c8eb40ac26717aef0ed9f, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -574,8 +574,8 @@ MonoBehaviour:
     power to control the four elements - fire, earth, air, water - and he used his
     abilities for good, defending the realm from evil and protecting the innocent
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: eec07dc7015c8eb40ac26717aef0ed9f, type: 2}
+  m_sharedMaterial: {fileID: -1189409196480081274, guid: eec07dc7015c8eb40ac26717aef0ed9f, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1030,8 +1030,8 @@ MonoBehaviour:
     and managed to strip Magnus of all his magical powers. The mage was left powerless
     and defeated, unable to stop Zarek from causing destruction across the kingdom.
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: eec07dc7015c8eb40ac26717aef0ed9f, type: 2}
+  m_sharedMaterial: {fileID: -1189409196480081274, guid: eec07dc7015c8eb40ac26717aef0ed9f, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1454,8 +1454,8 @@ MonoBehaviour:
   m_text: 'Magnus, now a shadow of his former self, sets out on a perilous journey
     to reclaim his powers and to defeat Zarek once and for all. '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: eec07dc7015c8eb40ac26717aef0ed9f, type: 2}
+  m_sharedMaterial: {fileID: -1189409196480081274, guid: eec07dc7015c8eb40ac26717aef0ed9f, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
