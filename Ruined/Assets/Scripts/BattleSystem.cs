@@ -338,7 +338,7 @@ public class BattleSystem : MonoBehaviour
 
         playerPrefab.transform.localScale = new Vector3(1.5f, 2.25f, 1f);
         playerAnimator.SetBool("Attacking_2", true);
-        if (attackDamage == 100)
+        if (attackDamage == 10)
         {
             audioSource.PlayOneShot(StrongAttackClip);
         }else
