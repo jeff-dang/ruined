@@ -40,6 +40,11 @@ public class ReturnMainMenu : MonoBehaviour
         
     }
 
+    public void onMainMenuClick()
+    {
+        SceneManager.LoadScene("UserInterfaceScene");
+    }
+
     // Update is called once per frame
     void Update()
     {
