@@ -45,6 +45,16 @@ public class ViewMapHandler : MonoBehaviour
 
     }
 
+    public void onViewTutorialButtonClick()
+    {
+        if (!SoundManager.isMute)
+        {
+            menuClickSource.Play();
+        }
+        StartCoroutine(waitForTutorial(menuClickSource));
+
+    }
+
     IEnumerator waitForSoundMap(AudioSource menuClickSource)
     {
         //Wait Until Sound has finished playing
@@ -67,6 +77,17 @@ public class ViewMapHandler : MonoBehaviour
         }
 
         SceneManager.LoadScene("LoreScene");
+    }
+
+    IEnumerator waitForTutorial(AudioSource menuClickSource)
+    {
+        //Wait Until Sound has finished playing
+        while (menuClickSource.isPlaying)
+        {
+            yield return null;
+        }
+
+        SceneManager.LoadScene("TutorialScene");
     }
 
 

@@ -879,7 +879,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PreviousLevels:
   - Safe1
-  - Start
   AccesibleLevels: []
   LevelName: 2-2
   Area: Mist
@@ -1611,7 +1610,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PreviousLevels:
   - Safe1
-  - Start
   AccesibleLevels: []
   LevelName: 2-1
   Area: Mist
@@ -1979,7 +1977,6 @@ MonoBehaviour:
   PreviousLevels:
   - 5-1
   - 5-2
-  - Start
   AccesibleLevels: []
   LevelName: Boss
   Area: Volcano
@@ -2273,7 +2270,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PreviousLevels:
   - Safe2
-  - Start
   AccesibleLevels: []
   LevelName: 3-2
   Area: Swamp
@@ -3976,7 +3972,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PreviousLevels:
   - Safe2
-  - Start
   AccesibleLevels: []
   LevelName: 3-1
   Area: Swamp
@@ -4200,7 +4195,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PreviousLevels:
   - Safe4
-  - Start
   AccesibleLevels: []
   LevelName: 5-1
   Area: Volcano
@@ -5220,7 +5214,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PreviousLevels:
   - Safe3
-  - Start
   AccesibleLevels: []
   LevelName: 4-1
   Area: Swamp
@@ -5470,7 +5463,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PreviousLevels:
   - Safe3
-  - Start
   AccesibleLevels: []
   LevelName: 4-2
   Area: Swamp
@@ -5899,7 +5891,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PreviousLevels:
   - Safe4
-  - Start
   AccesibleLevels: []
   LevelName: 5-2
   Area: Volcano

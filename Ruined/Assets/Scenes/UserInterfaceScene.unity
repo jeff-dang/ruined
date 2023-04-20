@@ -2183,7 +2183,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 241688783}
         m_TargetAssemblyTypeName: ViewMapHandler, Assembly-CSharp
-        m_MethodName: onViewMapButtonClick
+        m_MethodName: onViewTutorialButtonClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
