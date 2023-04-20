@@ -12,8 +12,13 @@ public class ViewMapHandler : MonoBehaviour
 
     public void onViewMapButtonClick()
     {
-        menuClickSource.Play();
+        if (!SoundManager.isMute)
+        {
+            menuClickSource.Play();
+        }
         StartCoroutine(waitForSoundMap(menuClickSource));
+        
+        
 
         //Auidio has finished playing
 
@@ -32,7 +37,10 @@ public class ViewMapHandler : MonoBehaviour
 
     public void onViewLoreButtonClick()
     {
-        menuClickSource.Play();
+        if (!SoundManager.isMute)
+        {
+            menuClickSource.Play();
+        }
         StartCoroutine(waitForSoundLore(menuClickSource));
 
     }

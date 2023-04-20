@@ -71,6 +71,10 @@ public class BattleSystem : MonoBehaviour
 		level = MapManager.CurrentLevel;
         playerAnimator = playerPrefab.GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
+		if (SoundManager.isMute)
+        {
+			audioSource.enabled = false;
+        }
 		//playerUnit.currentHP = MapManager.currentHP;
 		StartCoroutine(SetupBattle());
 	}
@@ -566,7 +570,7 @@ public class BattleSystem : MonoBehaviour
 		if (state != BattleState.PLAYERTURN)
 			return;
 
-		StartCoroutine(Struggle());
+		StartCoroutine(PlayerAttack(new int[] {0,1,2,3,4,5,6,7,8},1));
 	}
 
 	public void OnHorizontalAttackButton()

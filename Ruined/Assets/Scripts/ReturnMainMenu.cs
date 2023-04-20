@@ -11,7 +11,10 @@ public class ReturnMainMenu : MonoBehaviour
 
     public void onViewMainButtonClick()
     {
-        menuClickSource.Play();
+        if (!SoundManager.isMute)
+        {
+            menuClickSource.Play();
+        }
         StartCoroutine(waitForSound(menuClickSource));
 
     }
@@ -30,6 +33,10 @@ public class ReturnMainMenu : MonoBehaviour
     void Start()
     {
         menuClickSource = GetComponent<AudioSource>();
+        if (SoundManager.isMute)
+        {
+            this.gameObject.GetComponent<AudioSource>().enabled = false;
+        }
         
     }
 

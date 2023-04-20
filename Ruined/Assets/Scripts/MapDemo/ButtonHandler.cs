@@ -26,7 +26,10 @@ public class ButtonHandler : MonoBehaviour
         if (PreviousLevels.Contains(MapManager.CurrentLevel)) {
             changeIconToDestination(b);
             b.onClick.AddListener(delegate () {
-                menuClickSource.Play();
+                if (!SoundManager.isMute)
+                {
+                    menuClickSource.Play();
+                }
                 StartCoroutine(waitForSound(menuClickSource));               
             });
         }
@@ -49,7 +52,7 @@ public class ButtonHandler : MonoBehaviour
         //Auidio has finished playing
         MapManager.CurrentLevel = LevelName;
         MapManager.CurrentArea = Area;
-        if (MapManager.CurrentLevel == "Safe1" || MapManager.CurrentLevel == "Safe2" || MapManager.CurrentLevel == "Safe3")
+        if (MapManager.CurrentLevel == "Safe1" || MapManager.CurrentLevel == "Safe2" || MapManager.CurrentLevel == "Safe3" || MapManager.CurrentLevel == "Safe4")
         {
 
             SceneManager.LoadScene("SafeScene");
